@@ -4,7 +4,8 @@ import backgroundImage from "../../../../../assets/PostJob.png";
 const PostJobs = () => {
   const ctaStyle = {
     margin: "100px auto",
-    width: "80%",
+    width: "100%",
+    height: "100%",
     backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${backgroundImage})`,
     backgroundPosition: "center",
     backgroundSize: "cover",

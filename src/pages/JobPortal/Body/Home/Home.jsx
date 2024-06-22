@@ -7,7 +7,7 @@ import Card from './Card/Card'
 
 const LandingPAge = () => {
   return (
-    <div className="space-y-3" >
+    <div className="space-y-10" >
       <HeroHome/>
       <Card/>
       <PostJobs/>
