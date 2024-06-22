@@ -9,10 +9,9 @@ const LandingPAge = () => {
   return (
     <div className="space-y-3" >
       <HeroHome/>
-      <FeaturedJobs/>
+      <Card/>
       <PostJobs/>
       <AboutUs/>
-      <Card/>
     </div>
   )
 }
