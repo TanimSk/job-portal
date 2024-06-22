@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Pagination, Navigation } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/effect-creative";
 import "swiper/css/pagination";
@@ -14,9 +15,9 @@ import { FaClock } from "react-icons/fa6";
 
 const Card = () => {
   return (
-    <div className="space-y-14 bg-[#F9FAFB]">
+    <div className="space-y-5 bg-[#F9FAFB] mt-[3rem]">
       <h1 className="text-4xl font-bold text-center text-[#3670a3]">
-        Featured Jobs
+        Posted Job ...
       </h1>
       <div className="container mx-auto px-4 py-12 shadow-lg">
         <Swiper
@@ -65,7 +66,7 @@ const Card = () => {
                         <span>{item.location}</span>
                       </p>
                       <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
-                        Apply Now
+                        Cancel
                       </button>
                     </div>
                   </div>
@@ -99,7 +100,7 @@ const Card = () => {
                         <span>{item.location}</span>
                       </p>
                       <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
-                        Apply Now
+                       Cancel
                       </button>
                     </div>
                   </div>

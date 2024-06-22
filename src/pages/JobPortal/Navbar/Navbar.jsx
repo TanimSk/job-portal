@@ -1,9 +1,11 @@
 import React from "react";
 import Logo from "../../../assets/loginAnimation.gif";
 import { Heading } from "../../../Constant";
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
+  const navigate = useNavigate()
   return (
     <div className="interfont flex items-center justify-between p-3 ">
       <div className="rounded-full flex items-center justify-between space-x-2">
@@ -18,13 +20,24 @@ const Navbar = () => {
         </h1>
       </div>
       <div className="links flex items-center text-[#404040]  space-x-10 font-md">
-        {Heading.map((items, index) => {
-          return (
-            <div key={index} className="nav-item  cursor-pointer font-semibold">
-              {items.tittle}
-            </div>
-          );
-        })}
+        <div
+          onClick={() => {
+            navigate("/");
+          }}
+          className="nav-item  cursor-pointer font-semibold"
+        >
+          Home
+        </div>
+        <div className="nav-item  cursor-pointer font-semibold">Find jobs</div>
+        <div
+          onClick={() => {
+            navigate("/companydashboard");
+          }}
+          className="nav-item  cursor-pointer font-semibold"
+        >
+          Post Jobs
+        </div>
+        <div className="nav-item  cursor-pointer font-semibold">Contact Us</div>
       </div>
     </div>
   );

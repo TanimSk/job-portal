@@ -7,9 +7,9 @@ import { Outlet } from "react-router-dom";
 
 const JobPortal = () => {
   return (
-    <div className="interfont">
+    <div className="interfont bg-[#F9FAFB]">
       {/* Navbar */}
-      <div className="w-full  shadow-md top-0 sticky z-50 bg-white">
+      <div className="w-full  shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
         <div className={`${style.paddingX} ${style.flexCenter}`}>
           <div className={`${style.boxWidth} z-10`}>
             <Navbar />
@@ -17,7 +17,7 @@ const JobPortal = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="relative top-[-4.17rem]">
+      <div className="relative">
         <Outlet />
       </div>
       {/* Footer */}

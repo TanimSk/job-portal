@@ -8,7 +8,6 @@ const HeroHome = () => {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${backgroundImage})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
-    borderRadius: "10px",
     textAlign: "center",
     padding: "100px 0",
   };
