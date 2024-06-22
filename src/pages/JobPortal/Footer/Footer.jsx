@@ -9,7 +9,7 @@ import { SiTelegram } from "react-icons/si";
 const Footer = () => {
   return (
     <div>
-      <div className="py-5 bg-black">
+      <div className="py-5 bg-[#00315B]">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-y-16 gap-x-12">
             <div className="col-span-3">

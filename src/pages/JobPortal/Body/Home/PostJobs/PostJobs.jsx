@@ -16,13 +16,13 @@ const PostJobs = () => {
 
   return (
     <div className="text-center">
-      <h1 className="text-4xl font-bold mb-4 text-gray-800">Post a Job</h1>
+      <h1 className="text-4xl font-bold mb-4 text-[#3670a3]">Post a Job</h1>
       <div style={ctaStyle} className="space-y-6">
-        <h1 className="text-4xl font-bold text-white">
+        <h1 className="text-4xl font-bold text-white px-5">
           Reach the best candidates by posting your job here. Click the button
           below
         </h1>
-        <div className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-1000 hover:bg-[#f44336] hover:border-[#f44336]">
+        <div className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]">
           Post Job
         </div>
       </div>

@@ -17,12 +17,8 @@ const JobPortal = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="w-full   bg-cover bg-center relative top-[-4.17rem] z-0 bg-geen-400">
-        <div className={`${style.paddingX} ${style.flexCenter}`}>
-          <div className={`${style.boxWidth} z-10`}>
-            <Outlet />
-          </div>
-        </div>
+      <div className="relative top-[-4.17rem]">
+        <Outlet />
       </div>
       {/* Footer */}
       <div className="bg-slate-500">
