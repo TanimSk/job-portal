@@ -32,25 +32,7 @@ export const Heading = [
   },
 ];
 
-export const FeaturedJobsgroup = [
-  {
-    icon: <FaBuilding size={25} />,
-    tittle: "Web Develpment",
-    jobtime: "Full-Time",
-    location: "USA",
-  },
-  {
-    icon: <FaBuilding size={25} />,
-    tittle: "Machine Learning",
-    jobtime: "Part-Time",
-    location: "Canada",
-  },
-  {
-    icon: <FaBuilding size={25} />,
-    tittle: "Marketting",
-    jobtime: "Full-Time",
-    location: "Japan",
-  },
+export const FeaturedJobsgroup1 = [
   {
     icon: <FaBuilding size={25} />,
     tittle: "Web Develpment",
@@ -71,22 +53,22 @@ export const FeaturedJobsgroup = [
   },
   
 ];
-export const FeaturedJobsgroupMobile = [
+export const FeaturedJobsgroup2 = [
   {
     icon: <FaBuilding size={25} />,
-    tittle: "Web Develpment",
+    tittle: "Data Entry",
     jobtime: "Full-Time",
     location: "USA",
   },
   {
     icon: <FaBuilding size={25} />,
-    tittle: "Machine Learning",
+    tittle: "Video Editing",
     jobtime: "Part-Time",
     location: "Canada",
   },
   {
     icon: <FaBuilding size={25} />,
-    tittle: "Marketting",
+    tittle: "App Developement",
     jobtime: "Full-Time",
     location: "Japan",
   },
