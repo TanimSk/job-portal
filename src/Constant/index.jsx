@@ -19,7 +19,6 @@ export const jobsCompanies = [
   {
     tittle: "Companies",
     amount: "16,450",
-    icon: <FaBuilding size={25} />,
   },
   {
     tittle: "Appointments",
@@ -41,24 +40,60 @@ export const Heading = [
     tittle: "Contact Us",
   },
 ];
-
+export const Applicants1 = [
+  {
+    name: "Md Tofaal Ahmed",
+    img: web,
+    jobrole:"Video Editor",
+    university:"University Of Rajshahi"
+  },
+  {
+    name: "Tanim Sk",
+    img: web,
+    jobrole:"Hacker",
+    university:"University Of Rajshahi"
+  },
+  {
+    name: "Tofajjul Islam",
+    img: web,
+    jobrole:"Game developer",
+    university:"University Of Rajshahi"
+  },
+];
+export const Applicants2 = [
+  {
+    name: "Naiem Siddeki",
+    img: web,
+    jobrole:"Influencer",
+    university:"University Of Rajshahi"
+  },
+  {
+    name: "Hasnat Shafi",
+    img: web,
+    jobrole:"App Developer",
+    university:"University Of Rajshahi"
+  },
+  {
+    name: "Ramim Sabil",
+    img: web,
+    jobrole:"Matchine Language expert",
+    university:"University Of Rajshahi"
+  },
+];
 export const FeaturedJobsgroup1 = [
   {
-    icon: <FaBuilding size={25} />,
     tittle: "Web Develpment",
     img:web,
     jobtime: "Full-Time",
     location: "Dhaka",
   },
   {
-    icon: <FaBuilding size={25} />,
     tittle: "Machine Learning",
     img:peoplw,
     jobtime: "Part-Time",
     location: "Khulna",
   },
   {
-    icon: <FaBuilding size={25} />,
     tittle: "Marketting",
     img:market,
     jobtime: "Full-Time",
@@ -68,21 +103,18 @@ export const FeaturedJobsgroup1 = [
 ];
 export const FeaturedJobsgroup2 = [
   {
-    icon: <FaBuilding size={25} />,
     img: data,
     tittle: "Data Entry",
     jobtime: "Full-Time",
     location: "Dhaka",
   },
   {
-    icon: <FaBuilding size={25} />,
     img:video,
     tittle: "Video Editing",
     jobtime: "Part-Time",
     location: "Khulna",
   },
   {
-    icon: <FaBuilding size={25} />,
     img:app,
     tittle: "App Developement",
     jobtime: "Full-Time",

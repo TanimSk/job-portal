@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import FormModal from "./FormModal/FormModal";
-import PostedJob from './PostedJob/PostedJob'
+import PostedJob from "./PostedJob/PostedJob";
 import style from "../../../../style";
-import CompanyNav from "../CompanyDashboard/CompanyNav/CompanyNav"
-
+import CompanyNav from "../CompanyDashboard/CompanyNav/CompanyNav";
+import SeeApplicants from './SeeApplicants/SeeApplicants'
 
 const ApplicantDashboard1 = [
   {
@@ -16,9 +16,17 @@ const ApplicantDashboard1 = [
 
 const ApplicantDashboard = () => {
   const [showFormModal, setShowFormModal] = useState(false);
+  const [Applicants, setApplicants] = useState(false);
 
-  const handleCardClick = () => {
+  const handleClickJob = () => {
     setShowFormModal(true);
+    setApplicants(false)
+  };
+  const handleClickSeepostedjobs = () => {
+    setApplicants(false);
+  };
+  const handleClickApplicants = () => {
+    setApplicants(true);
   };
 
   return (
@@ -30,7 +38,7 @@ const ApplicantDashboard = () => {
           </div>
         </div>
       </div>
-      <section className="pt-10 h-screen overflow-hidden bg-gray-50 md:pt-0 sm:pt-16 2xl:pt-16">
+      <section className="pt-10 h-screen overflow-hidden  md:pt-0 sm:pt-16 2xl:pt-16">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid items-center grid-cols-1 md:grid-cols-2">
             <div>
@@ -53,11 +61,26 @@ const ApplicantDashboard = () => {
                       <span className="text-[#3670a3]">{item.description}</span>
                     </span>
                   </p>
-                  <div
-                    onClick={handleCardClick}
-                    className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
-                  >
-                    Post Job
+
+                    <div
+                      onClick={handleClickJob}
+                      className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
+                    >
+                      Post Job
+                    </div>
+                  <div className="flex space-x-3">
+                    <div
+                      onClick={handleClickSeepostedjobs}
+                      className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
+                    >
+                      See posted jobs
+                    </div>
+                    <div
+                      onClick={handleClickApplicants}
+                      className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
+                    >
+                      See Applicants
+                    </div>
                   </div>
                 </div>
               ))}
@@ -84,7 +107,7 @@ const ApplicantDashboard = () => {
           </div>
         </div>
       </section>
-      <PostedJob />
+      {Applicants ?  <SeeApplicants /> :<PostedJob />}
     </div>
   );
 };
