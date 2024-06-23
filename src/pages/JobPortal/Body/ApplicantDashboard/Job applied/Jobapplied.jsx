@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Pagination, Navigation } from "swiper/modules";
+import FormModal from "../FormModal/FormModal";
 import "swiper/css";
 import "swiper/css/effect-creative";
 import "swiper/css/pagination";
@@ -13,6 +14,11 @@ import { MdLocationPin } from "react-icons/md";
 import { FaClock } from "react-icons/fa6";
 
 const Card = () => {
+  const [showFormModal, setShowFormModal] = useState(false);
+
+  const handleCardClick = () => {
+    setShowFormModal(true);
+  };
   return (
     <div className="space-y-5  mt-[3rem]">
       <h1 className="text-4xl font-bold text-center text-[#3670a3]">
@@ -64,9 +70,17 @@ const Card = () => {
                         <MdLocationPin className="text-white" size={20} />
                         <span>{item.location}</span>
                       </p>
-                      <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
-                        Cancel
-                      </button>
+                      <div
+                        onClick={handleCardClick}
+                        className="flex space-x-2 items-center justify-center"
+                      >
+                        <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-6 rounded-full hover:bg-white">
+                          View
+                        </button>
+                        <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -98,17 +112,33 @@ const Card = () => {
                         <MdLocationPin className="text-white" size={20} />
                         <span>{item.location}</span>
                       </p>
-                      <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
-                       Cancel
-                      </button>
+                      <div className="flex space-x-2 items-center justify-center">
+                        <button
+                          onClick={handleCardClick}
+                          className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-6 rounded-full hover:bg-white"
+                        >
+                          View
+                        </button>
+                        <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+            <FormModal
+              isVisible={showFormModal}
+              onClose={() => setShowFormModal(false)}
+            />
           </SwiperSlide>
         </Swiper>
       </div>
+      <FormModal
+        isVisible={showFormModal}
+        onClose={() => setShowFormModal(false)}
+      />
     </div>
   );
 };

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Pagination, Navigation } from "swiper/modules";
+import FormModal from '../FormModal/FormModal'
 
 import "swiper/css";
 import "swiper/css/effect-creative";
@@ -14,6 +15,10 @@ import { MdLocationPin } from "react-icons/md";
 import { FaClock } from "react-icons/fa6";
 
 const Card = () => {
+ const [form, setform] = useState(false)
+ const handleCardClick = () => {
+   setform(true);
+ };
   return (
     <div className="space-y-5 bg-[#F9FAFB] mt-[3rem]">
       <h1 className="text-4xl font-bold text-center text-[#3670a3]">
@@ -65,9 +70,17 @@ const Card = () => {
                         <MdLocationPin className="text-white" size={20} />
                         <span>{item.location}</span>
                       </p>
-                      <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
-                        Cancel
-                      </button>
+                      <div className="flex items-center justify-center space-x-3">
+                        <button
+                          onClick={handleCardClick}
+                          className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-6 rounded-full hover:bg-white"
+                        >
+                          View
+                        </button>
+                        <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
+                          Cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -83,7 +96,7 @@ const Card = () => {
                 >
                   <div className="max-w-sm bg-black border shadow-lg border-gray-200 rounded-lg">
                     <img
-                      className="rounded-t-lg w-[20rem] object-cover h-[12rem] object-cover"
+                      className="rounded-t-lg w-[20rem] object-cover h-[12rem] "
                       src={item.img}
                       alt={item.tittle}
                     />
@@ -99,9 +112,17 @@ const Card = () => {
                         <MdLocationPin className="text-white" size={20} />
                         <span>{item.location}</span>
                       </p>
-                      <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
-                       Cancel
-                      </button>
+                      <div className="flex items-center justify-center space-x-3">
+                        <button
+                          onClick={handleCardClick}
+                          className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-6 rounded-full hover:bg-white"
+                        >
+                          View
+                        </button>
+                        <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
+                          Cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -110,6 +131,8 @@ const Card = () => {
           </SwiperSlide>
         </Swiper>
       </div>
+      {/* FormModal */}
+      <FormModal isVisible={form} onClose={() => setform(false)} />
     </div>
   );
 };

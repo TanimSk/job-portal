@@ -110,8 +110,8 @@ const Modal = ({ isVisible, onClose }) => {
             />
           </div>
 
-          <div className="flex flex-col space-y-3  mb-4"> 
-            <div className="flex">
+          <div className="flex flex-col  mb-4">
+            <div className="flex items-center space-x-5 ">
               <label className="flex items-center">
                 <input
                   type="radio"
@@ -133,7 +133,7 @@ const Modal = ({ isVisible, onClose }) => {
                 On-site
               </label>
             </div>
-            <div className="flex">
+            <div className="flex items-center space-x-3">
               <label className="flex items-center">
                 <input
                   type="radio"

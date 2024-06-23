@@ -11,8 +11,11 @@ import JobPortal from "./pages/JobPortal/JobPortal";
 import Home from './pages/JobPortal/Body/Home/Home'
 import Jobs from "./pages/JobPortal/Body/Jobs/Jobs";
 
+
 import ApplicantDashboard from "./pages/JobPortal/Body/ApplicantDashboard/ApplicantDashboard";
+import ApplicantProfile from "./pages/JobPortal/Body/ApplicantDashboard/ApplicantProfile/ApplicantProfile";
 import CompanyDashboard from "./pages/JobPortal/Body/CompanyDashboard/CompanyDashboard";
+import CompanyProfile from'./pages/JobPortal/Body/CompanyDashboard/CompanyProfile/CompanyProfile';
 
 
 const router = createBrowserRouter([
@@ -45,6 +48,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/ApplicantProfile",
+    element: <ApplicantProfile />,
+  },
+  {
+    path: "/Companyprofile",
+    element: <CompanyProfile />,
   },
 ]);
 

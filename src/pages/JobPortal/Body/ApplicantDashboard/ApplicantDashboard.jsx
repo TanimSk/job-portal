@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import Jobapplied from './Job applied/Jobapplied'
-import FormModal from "./FormModal/FormModal";
+import Jobapplied from "./Job applied/Jobapplied";
+// import FormModal from "./FormModal/FormModal";
+import ApplicantNavbar from "./ApplicantNavbar/ApplicantNavbar";
+import style from "../../../../style";
 
 const ApplicantDashboard1 = [
   {
@@ -10,19 +12,26 @@ const ApplicantDashboard1 = [
     subject: "Computer Science and Engineering",
     description:
       "I am highly proficient in Video Editing, leveraging my expertise to deliver exceptional results in various projects and initiatives.",
-    JobRole:"Video Editor"
+    JobRole: "Video Editor",
   },
 ];
 
 const ApplicantDashboard = () => {
-    const [showFormModal, setShowFormModal] = useState(false);
+  // const [showFormModal, setShowFormModal] = useState(false);
 
-    const handleCardClick = () => {
-      setShowFormModal(true);
-    };
+  // const handleCardClick = () => {
+  //   setShowFormModal(true);
+  // };
 
   return (
     <div>
+      <div className="w-full  shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
+        <div className={`${style.paddingX} ${style.flexCenter}`}>
+          <div className={`${style.boxWidth} z-10`}>
+            <ApplicantNavbar />
+          </div>
+        </div>
+      </div>
       <section className="pt-10 h-screen overflow-hidden bg-gray-50 md:pt-0 sm:pt-16 2xl:pt-16">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid items-center grid-cols-1 md:grid-cols-2">
@@ -66,12 +75,12 @@ const ApplicantDashboard = () => {
                       <span className="text-[#3670a3]"> {item.JobRole}</span>
                     </span>
                   </p>
-                  <div
+                  {/* <div
                     onClick={handleCardClick}
                     className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
                   >
                     Resume
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
@@ -91,11 +100,12 @@ const ApplicantDashboard = () => {
             </div>
           </div>
         </div>
-        <FormModal
+        {/* <FormModal
           isVisible={showFormModal}
           onClose={() => setShowFormModal(false)}
-        />
+        /> */}
       </section>
+      {/* Job Applied */}
       <section>
         <Jobapplied />
       </section>

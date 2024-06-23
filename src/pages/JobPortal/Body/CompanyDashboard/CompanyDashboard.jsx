@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import FormModal from "./FormModal/FormModal";
 import PostedJob from './PostedJob/PostedJob'
+import style from "../../../../style";
+import CompanyNav from "../CompanyDashboard/CompanyNav/CompanyNav"
+
 
 const ApplicantDashboard1 = [
   {
@@ -19,8 +22,14 @@ const ApplicantDashboard = () => {
   };
 
   return (
-    
     <div>
+      <div className="w-full  shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
+        <div className={`${style.paddingX} ${style.flexCenter}`}>
+          <div className={`${style.boxWidth} z-10`}>
+            <CompanyNav />
+          </div>
+        </div>
+      </div>
       <section className="pt-10 h-screen overflow-hidden bg-gray-50 md:pt-0 sm:pt-16 2xl:pt-16">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid items-center grid-cols-1 md:grid-cols-2">
@@ -68,11 +77,14 @@ const ApplicantDashboard = () => {
               />
             </div>
             {/* FormModal */}
-            <FormModal isVisible={showFormModal} onClose={() => setShowFormModal(false)} />
+            <FormModal
+              isVisible={showFormModal}
+              onClose={() => setShowFormModal(false)}
+            />
           </div>
         </div>
       </section>
-      <PostedJob/>
+      <PostedJob />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Logo from "../../../assets/loginAnimation.gif";
+import Logo from "../../../../../assets/loginAnimation.gif";
+import Profile from "../../../../../assets/About.jpeg";
 import { GiHamburgerMenu } from "react-icons/gi";
-
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -54,12 +54,30 @@ const Navbar = () => {
         >
           Post Jobs
         </div>
-        {/* <div className="nav-item  cursor-pointer font-semibold">Contact Us</div> */}
+        <div className="cursor-pointer">
+          <img
+            onClick={() => {
+              navigate("/Companyprofile");
+            }}
+            className="rounded-full w-[3rem] h-[3rem] object-cover"
+            src={Profile}
+            alt=""
+          />
+        </div>
       </div>
       {/* Mobile */}
       <div className="block md:hidden cursor-pointer">
-        <div onClick={() => setopenClose((prev) => !prev)}>
-          <GiHamburgerMenu />
+        <div className="flex space-x-3 items-center">
+          <div className="cursor-pointer">
+            <img
+              className="rounded-full w-[2.5rem] h-[2.5rem] object-cover"
+              src={Profile}
+              alt=""
+            />
+          </div>
+          <div onClick={() => setopenClose((prev) => !prev)}>
+            <GiHamburgerMenu />
+          </div>
         </div>
         <div
           className={`${
@@ -90,8 +108,8 @@ const Navbar = () => {
           >
             Post Jobs
           </div>
-          {/* <div className="nav-item  cursor-pointer font-semibold">
-            Contact Us
+          {/* <div className="cursor-pointer">
+            <img src={Profile} alt="" />
           </div> */}
         </div>
       </div>

@@ -1,6 +1,4 @@
 import React from "react";
-import Avater from "../../../../../assets/About.jpeg"; // Adjust the path as per your file structure
-
 import { BsFillSignpostFill } from "react-icons/bs";
 
 const Modal = ({ isVisible, onClose, job }) => {
