@@ -49,7 +49,7 @@ const Card = () => {
                 >
                   <div className="max-w-xs bg-black border border-gray-200 rounded-lg">
                     <img
-                      className="rounded-t-lg w-[20rem] h-[16rem]"
+                      className="rounded-t-lg w-[20rem] h-[12rem] object-cover"
                       src={item.img}
                       alt={item.tittle}
                     />
@@ -83,7 +83,7 @@ const Card = () => {
                 >
                   <div className="max-w-sm bg-black border shadow-lg border-gray-200 rounded-lg">
                     <img
-                      className="rounded-t-lg w-[20rem] object-cover h-[16rem]"
+                      className="rounded-t-lg w-[20rem] object-cover h-[12rem] object-cover"
                       src={item.img}
                       alt={item.tittle}
                     />

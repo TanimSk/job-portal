@@ -14,7 +14,7 @@ import { FaClock } from "react-icons/fa6";
 
 const Card = () => {
   return (
-    <div className="space-y-5 bg-[#F9FAFB] mt-[3rem]">
+    <div className="space-y-5  mt-[3rem]">
       <h1 className="text-4xl font-bold text-center text-[#3670a3]">
         Pending Applications...
       </h1>
@@ -48,7 +48,7 @@ const Card = () => {
                 >
                   <div className="max-w-xs bg-black border border-gray-200 rounded-lg">
                     <img
-                      className="rounded-t-lg w-[20rem] h-[16rem]"
+                      className="rounded-t-lg w-[20rem] h-[12rem] object-cover"
                       src={item.img}
                       alt={item.tittle}
                     />
@@ -78,11 +78,11 @@ const Card = () => {
               {FeaturedJobsgroup2.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-lg flex flex-col items-center text-center transition duration-300 ease-in-out transform hover:scale-105"
+                  className=" p-6 rounded-lg flex flex-col items-center text-center transition duration-300 ease-in-out transform hover:scale-105"
                 >
                   <div className="max-w-sm bg-black border shadow-lg border-gray-200 rounded-lg">
                     <img
-                      className="rounded-t-lg w-[20rem] object-cover h-[16rem]"
+                      className="rounded-t-lg w-[20rem]  h-[12rem] object-cover"
                       src={item.img}
                       alt={item.tittle}
                     />

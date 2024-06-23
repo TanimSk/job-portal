@@ -5,7 +5,7 @@ import PostJobs from './PostJobs/PostJobs'
 import Card from './Card/Card'
 const LandingPAge = () => {
   return (
-    <div className="space-y-10  bg-gray-50 ">
+    <div className="space-y-20  bg-gray-50 ">
       <HeroHome />
       <Card />
       <PostJobs />

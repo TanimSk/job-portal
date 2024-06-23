@@ -28,7 +28,14 @@ const Navbar = () => {
         >
           Home
         </div>
-        <div className="nav-item  cursor-pointer font-semibold">Find jobs</div>
+        <div
+          onClick={() => {
+            navigate("/jobs");
+          }}
+          className="nav-item  cursor-pointer font-semibold"
+        >
+          Find jobs
+        </div>
         <div
           onClick={() => {
             navigate("/companydashboard");
