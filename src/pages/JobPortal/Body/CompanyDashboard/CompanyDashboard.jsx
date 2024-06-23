@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormModal from "./FormModal/FormModal";
+import PostedJob from './PostedJob/PostedJob'
 
 const ApplicantDashboard1 = [
   {
@@ -71,6 +72,7 @@ const ApplicantDashboard = () => {
           </div>
         </div>
       </section>
+      <PostedJob/>
     </div>
   );
 };
