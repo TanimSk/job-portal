@@ -10,7 +10,7 @@ import LoginPage from "./pages/login/LoginPage";
 import JobPortal from "./pages/JobPortal/JobPortal";
 import Home from './pages/JobPortal/Body/Home/Home'
 import Jobs from "./pages/JobPortal/Body/Jobs/Jobs";
-import JobDetail from "./pages/JobPortal/Body/JobDetail/JobDetail";
+
 import ApplicantDashboard from "./pages/JobPortal/Body/ApplicantDashboard/ApplicantDashboard";
 import CompanyDashboard from "./pages/JobPortal/Body/CompanyDashboard/CompanyDashboard";
 
@@ -27,10 +27,6 @@ const router = createBrowserRouter([
       {
         path: "/jobs",
         element: <Jobs />,
-      },
-      {
-        path: "/jobDetail",
-        element: <JobDetail />,
       },
       {
         path: "/applicantdashboard",

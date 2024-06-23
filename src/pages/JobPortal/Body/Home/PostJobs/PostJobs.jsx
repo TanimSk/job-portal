@@ -1,7 +1,9 @@
 import React from "react";
 import backgroundImage from "../../../../../assets/PostJob.png";
+import { useNavigate } from "react-router-dom";
 
 const PostJobs = () => {
+  const navigate =useNavigate()
   const ctaStyle = {
     margin: "100px auto",
     width: "100%",
@@ -22,7 +24,10 @@ const PostJobs = () => {
           Reach the best candidates by posting your job here. Click the button
           below
         </h1>
-        <div className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]">
+        <div
+          onClick={() => navigate("/companydashboard")}
+          className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]"
+        >
           Post Job
         </div>
       </div>

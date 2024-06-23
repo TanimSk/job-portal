@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Jobapplied from './Job applied/Jobapplied'
+import FormModal from "./FormModal/FormModal";
 
 const ApplicantDashboard1 = [
   {
@@ -14,6 +15,12 @@ const ApplicantDashboard1 = [
 ];
 
 const ApplicantDashboard = () => {
+    const [showFormModal, setShowFormModal] = useState(false);
+
+    const handleCardClick = () => {
+      setShowFormModal(true);
+    };
+
   return (
     <div>
       <section className="pt-10 h-screen overflow-hidden bg-gray-50 md:pt-0 sm:pt-16 2xl:pt-16">
@@ -59,7 +66,10 @@ const ApplicantDashboard = () => {
                       <span className="text-[#3670a3]"> {item.JobRole}</span>
                     </span>
                   </p>
-                  <div className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2">
+                  <div
+                    onClick={handleCardClick}
+                    className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
+                  >
                     Resume
                   </div>
                 </div>
@@ -81,6 +91,10 @@ const ApplicantDashboard = () => {
             </div>
           </div>
         </div>
+        <FormModal
+          isVisible={showFormModal}
+          onClose={() => setShowFormModal(false)}
+        />
       </section>
       <section>
         <Jobapplied />

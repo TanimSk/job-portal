@@ -1,6 +1,7 @@
 import React from "react";
 import Avater from "../../../../../assets/About.jpeg"; // Adjust the path as per your file structure
-import { MdHealthAndSafety } from "react-icons/md";
+
+import { BsFillSignpostFill } from "react-icons/bs";
 
 const Modal = ({ isVisible, onClose, job }) => {
   if (!isVisible) {
@@ -25,14 +26,17 @@ const Modal = ({ isVisible, onClose, job }) => {
             X
           </button>
         </div>
-        <img
-          className="w-20 h-20 rounded-full object-cover border-2 border-[#53829C]"
-          src={Avater}
-          alt="Company Logo" // Change alt text accordingly
-        />
-        <p className="text-xs font-medium">{job.description}</p>
-        <div className="flex items-center justify-between mt-4">
+        <div className="space-y-4">
+          <p className="text-xs font-medium">{job.description}</p>
           <div>
+            <span className="text-md font-semibold">Dhaka</span>
+          </div>
+          <div>
+            <span className="text-md font-semibold">Full-Time</span>
+          </div>
+        </div>
+        <div>
+          <div className="flex items-center justify-between mt-4">
             <span className="text-md font-bold">{job.salary}</span>
             <span className="text-xs text-[#5E6368]">/month</span>
           </div>
@@ -45,7 +49,7 @@ const Modal = ({ isVisible, onClose, job }) => {
             type="button"
             className="bg-[#76c3ed] flex items-center justify-center hover:bg-[#69afd4] rounded-md px-3 py-2 cursor-pointer text-md font-semibold text-white"
           >
-            <MdHealthAndSafety size={25} />
+            <BsFillSignpostFill size={25} />
             <span>Apply Now</span>
           </button>
         </div>

@@ -32,7 +32,7 @@ const Jobs = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex md:flex-row flex-col justify-between items-start md:space-y-0 space-y-3 md:items-center mb-6">
           <select
             className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#9773df]"
             value={jobType}
