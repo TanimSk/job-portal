@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Pagination, Navigation } from "swiper/modules";
 import FormModal from '../../ApplicantDashboard/FormModal/FormModal'
@@ -20,7 +20,7 @@ const Card = () => {
    setform(true);
  };
   return (
-    <div className="space-y-5 bg-[#F9FAFB] mt-[3rem]">
+    <div  className="space-y-5 bg-[#F9FAFB] mt-[3rem]">
       <h1 className="text-4xl font-bold text-center text-[#3670a3]">
         Posted Job ...
       </h1>

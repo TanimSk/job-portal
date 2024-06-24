@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Pagination, Navigation } from "swiper/modules";
 import Applicantsmodal from '../ApplicantsModal/ApplicantsModal'

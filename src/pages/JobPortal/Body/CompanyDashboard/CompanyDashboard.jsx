@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import FormModal from "./FormModal/FormModal";
 import PostedJob from "./PostedJob/PostedJob";
 import style from "../../../../style";
 import CompanyNav from "../CompanyDashboard/CompanyNav/CompanyNav";
-import SeeApplicants from './SeeApplicants/SeeApplicants'
+import SeeApplicants from "./SeeApplicants/SeeApplicants";
 
 const ApplicantDashboard1 = [
   {
@@ -15,17 +15,20 @@ const ApplicantDashboard1 = [
 ];
 
 const ApplicantDashboard = () => {
+  const ref = useRef(null);
   const [showFormModal, setShowFormModal] = useState(false);
   const [Applicants, setApplicants] = useState(false);
 
   const handleClickJob = () => {
     setShowFormModal(true);
-    setApplicants(false)
+    setApplicants(false);
   };
   const handleClickSeepostedjobs = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
     setApplicants(false);
   };
   const handleClickApplicants = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
     setApplicants(true);
   };
 
@@ -62,12 +65,12 @@ const ApplicantDashboard = () => {
                     </span>
                   </p>
 
-                    <div
-                      onClick={handleClickJob}
-                      className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
-                    >
-                      Post Job
-                    </div>
+                  <div
+                    onClick={handleClickJob}
+                    className="mt-3 font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#3670a3] hover:bg-[#3670a3] hover:text-white duration-300 rounded-md border-[#3670a3] border-2"
+                  >
+                    Post Job
+                  </div>
                   <div className="flex space-x-3">
                     <div
                       onClick={handleClickSeepostedjobs}
@@ -107,7 +110,7 @@ const ApplicantDashboard = () => {
           </div>
         </div>
       </section>
-      {Applicants ?  <SeeApplicants /> :<PostedJob />}
+      <div ref={ref}>{Applicants ? <SeeApplicants /> : <PostedJob />}</div>
     </div>
   );
 };
