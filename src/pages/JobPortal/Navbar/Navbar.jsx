@@ -1,15 +1,45 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import Logo from "../../../assets/loginAnimation.gif";
 import { GiHamburgerMenu } from "react-icons/gi";
-
 import { useNavigate } from "react-router-dom";
+// Gsap
+import gsap from "gsap";
 
 const Navbar = () => {
+  // Gsap
+  const comp = useRef(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      let tl = gsap.timeline()
+      tl.from("#headlineLogo", {
+        y: -40, 
+        duration: 1,
+        opacity: 0,
+        delay:1
+      });
+      tl.from("#navitems #navitem", {
+        y: -40,
+        opacity: 0,
+        // delay:0.9,
+        stagger:0.2
+      });
+    }, comp);
+
+    return () => ctx.revert(); 
+  }, []);
+  // Main
   const [openClose, setopenClose] = useState(true);
   const navigate = useNavigate();
   return (
-    <div className="interfont flex items-center justify-between p-3 ">
-      <div className="rounded-full flex items-center justify-between space-x-2">
+    <div
+      ref={comp}
+      className="interfont flex items-center justify-between p-3 "
+    >
+      <div
+        id="headlineLogo"
+        className="rounded-full flex items-center justify-between space-x-2"
+      >
         <img
           onClick={() => {
             navigate("/");
@@ -29,8 +59,12 @@ const Navbar = () => {
         </h1>
       </div>
       {/* pc */}
-      <div className="links hidden md:flex items-center text-[#404040]  space-x-10 font-md">
+      <div
+        id="navitems"
+        className="links hidden md:flex items-center text-[#404040]  space-x-10 font-md"
+      >
         <div
+          id="navitem"
           onClick={() => {
             navigate("/");
           }}
@@ -39,6 +73,7 @@ const Navbar = () => {
           Home
         </div>
         <div
+          id="navitem"
           onClick={() => {
             navigate("/jobs");
           }}
@@ -47,6 +82,7 @@ const Navbar = () => {
           Find jobs
         </div>
         <div
+          id="navitem"
           onClick={() => {
             navigate("/companydashboard");
           }}

@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import backgroundImage from "../../../../../assets/hiro.jpg";
 import { jobsCompanies } from "../../../../../Constant";
 import { useNavigate } from "react-router-dom";
+// GSAP
+import gsap from "gsap";
+ 
 
 const HeroHome = () => {
-  const navigate =useNavigate()
-  const ctaStyle = {
+  // Gsap
+  const comp = useRef(null);
 
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      let tl = gsap.timeline();
+      tl.from("#heroGSAP #item", {
+        scale:0,
+        duration: 2,
+        opacity: 0,
+        stagger: 0.7,
+      });   
+    }, comp);
+
+    return () => ctx.revert();
+  }, []);
+  // Main
+  const navigate = useNavigate();
+  const ctaStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${backgroundImage})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
@@ -16,15 +35,17 @@ const HeroHome = () => {
 
   return (
     <div
+    ref={comp}
+    id="heroGSAP"
       style={ctaStyle}
       className="flex flex-col items-center justify-center h-screen px-6 py-12 space-y-4"
     >
       {/* Title */}
-      <h1 className="md:text-4xl text-3xl font-bold text-white mb-10 text-center">
+      <h1 id="item" className="md:text-4xl text-3xl font-bold text-white mb-10 text-center">
         Get Your Dream Job Today!
       </h1>
       {/* Job Companies List */}
-      <div className="flex flex-wrap justify-center md:gap-8 gap-3 ">
+      <div id="item" className="flex flex-wrap justify-center md:gap-8 gap-3 ">
         {jobsCompanies.map((item, index) => (
           <div
             className="flex flex-col items-center justify-center"
@@ -46,15 +67,22 @@ const HeroHome = () => {
           </div>
         ))}
       </div>
-      <div className="flex mt-4 space-x-4">
-        <div  onClick={() => {
+      {/* buttons */}
+      <div id="item" className="flex mt-4 space-x-4">
+        <div
+          onClick={() => {
             navigate("/jobs");
-          }} className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]">
+          }}
+          className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]"
+        >
           Get Job
         </div>
-        <div  onClick={() => {
+        <div
+          onClick={() => {
             navigate("/companydashboard");
-          }} className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]">
+          }}
+          className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]"
+        >
           Post Job
         </div>
       </div>
