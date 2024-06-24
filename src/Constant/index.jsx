@@ -17,6 +17,7 @@ export const jobsCompanies = [
     icon: <BsPeopleFill size={25} />,
   },
   {
+    icon: <FaBuilding size={25} />,
     tittle: "Companies",
     amount: "16,450",
   },
