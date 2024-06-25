@@ -6,6 +6,8 @@ import PostJobs from "./PostJobs/PostJobs";
 import Card from "./Card/Card";
 import style from "../../../../style";
 const Home = () => {
+  // Gsap
+  // End
   return (
     <div className="interfont bg-[#F9FAFB]">
       {/* Navbar */}

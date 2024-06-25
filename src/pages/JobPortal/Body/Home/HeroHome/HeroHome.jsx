@@ -2,6 +2,8 @@ import React, { useLayoutEffect, useRef } from "react";
 import backgroundImage from "../../../../../assets/hiro.jpg";
 import { jobsCompanies } from "../../../../../Constant";
 import { useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+
 // GSAP
 import gsap from "gsap";
  
@@ -15,9 +17,9 @@ const HeroHome = () => {
       let tl = gsap.timeline();
       tl.from("#heroGSAP #item", {
         scale:0,
-        duration: 2,
+        duration: 1,
         opacity: 0,
-        stagger: 0.7,
+        stagger: 0.2,
       });   
     }, comp);
 
@@ -35,13 +37,16 @@ const HeroHome = () => {
 
   return (
     <div
-    ref={comp}
-    id="heroGSAP"
+      ref={comp}
+      id="heroGSAP"
       style={ctaStyle}
       className="flex flex-col items-center justify-center h-screen px-6 py-12 space-y-4"
     >
       {/* Title */}
-      <h1 id="item" className="md:text-4xl text-3xl font-bold text-white mb-10 text-center">
+      <h1
+        id="item"
+        className="md:text-4xl text-3xl font-bold text-white mb-10 text-center"
+      >
         Get Your Dream Job Today!
       </h1>
       {/* Job Companies List */}
@@ -73,17 +78,12 @@ const HeroHome = () => {
           onClick={() => {
             navigate("/jobs");
           }}
-          className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]"
+          className="font-semibold mt-[1rem] w-[15rem] flex items-center justify-between w-full px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#ffffff70] border border-white duration-500 hover:bg-black hover:border-white"
         >
-          Get Job
-        </div>
-        <div
-          onClick={() => {
-            navigate("/companydashboard");
-          }}
-          className="font-semibold px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-white border border-white duration-500 hover:bg-[#f44336] hover:border-[#f44336]"
-        >
-          Post Job
+          <div>Looking for jobs?</div>
+          <div>
+            <FaSearch className="text-[#ffffff70]" size={20} />
+          </div>
         </div>
       </div>
     </div>

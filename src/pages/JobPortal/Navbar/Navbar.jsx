@@ -11,17 +11,16 @@ const Navbar = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      let tl = gsap.timeline()
-      tl.from("#headlineLogo", {
-        y: -40, 
-        duration: 1,
-        opacity: 0,
-        delay:1
-      });
-      tl.from("#navitems #navitem", {
+     
+      gsap.from("#headlineLogo", {
         y: -40,
         opacity: 0,
-        // delay:0.9,
+        delay: 0.4,
+      });
+      gsap.from("#navitems #navitem", {
+        y: -40,
+        opacity: 0,
+        delay:0.4,
         stagger:0.2
       });
     }, comp);
