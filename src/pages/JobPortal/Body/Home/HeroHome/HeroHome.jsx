@@ -73,17 +73,17 @@ const HeroHome = () => {
         ))}
       </div>
       {/* buttons */}
-      <div id="item" className="flex mt-4 space-x-4">
+      <div id="item" className="flex mt-5">
         <div
           onClick={() => {
             navigate("/jobs");
           }}
-          className="font-semibold mt-[1rem] w-[15rem] flex items-center justify-between w-full px-4 py-2 text-lg cursor-pointer inline-block bg-transparent text-[#ffffff70] border border-white duration-500 hover:bg-black hover:border-white"
+          className="font-semibold flex items-center justify-center px-4 py-2 text-lg cursor-pointer  bg-transparent text-[#ffffff70] border border-white duration-500 hover:bg-black hover:border-white"
         >
-          <div>Looking for jobs?</div>
-          <div>
+          <div className="mr-3">
             <FaSearch className="text-[#ffffff70]" size={20} />
           </div>
+          <div>Looking for jobs?</div>
         </div>
       </div>
     </div>
