@@ -78,7 +78,7 @@ const Card = () => {
               {FeaturedJobsgroup2.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-lg flex flex-col items-center text-center transition duration-300 ease-in-out transform hover:scale-105"
+                  className=" p-6 rounded-lg flex flex-col items-center text-center transition duration-300 ease-in-out transform hover:scale-105"
                 >
                   <div className="max-w-sm bg-black border shadow-lg border-gray-200 rounded-lg">
                     <img
