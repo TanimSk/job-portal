@@ -17,6 +17,7 @@ import ApplicantProfile from "./pages/JobPortal/Body/ApplicantDashboard/Applican
 import CompanyDashboard from "./pages/JobPortal/Body/CompanyDashboard/CompanyDashboard";
 import CompanyProfile from "./pages/JobPortal/Body/CompanyDashboard/CompanyProfile/CompanyProfile";
 import LoginPageCompany from "./pages/loginCompany/LoginPageCompany";
+import Apiadd from "./pages/Apiadd/apiadd";
 import {
   ApplicantPrivateRoute,
   CompanyPrivateRoute,
@@ -72,6 +73,11 @@ const router = createBrowserRouter([
   {
     path: "/company-login",
     element: <LoginPageCompany />,
+  },
+  
+  {
+    path: "/apiadd",
+    element:<Apiadd/>,
   },
   {
     path: "/ApplicantProfile",
