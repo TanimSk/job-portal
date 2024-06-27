@@ -5,18 +5,22 @@ import "./index.css";
 // Rect-router-dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Components:
+import RegistrationPageCompany from "./pages/registrationCompany/RegistrationPageCompany";
 import RegistrationPage from "./pages/registration/RegistrationPage";
 import LoginPage from "./pages/login/LoginPage";
 import JobPortal from "./pages/JobPortal/JobPortal";
-import Home from './pages/JobPortal/Body/Home/Home'
+import Home from "./pages/JobPortal/Body/Home/Home";
 import Jobs from "./pages/JobPortal/Body/Jobs/Jobs";
-
 
 import ApplicantDashboard from "./pages/JobPortal/Body/ApplicantDashboard/ApplicantDashboard";
 import ApplicantProfile from "./pages/JobPortal/Body/ApplicantDashboard/ApplicantProfile/ApplicantProfile";
 import CompanyDashboard from "./pages/JobPortal/Body/CompanyDashboard/CompanyDashboard";
-import CompanyProfile from'./pages/JobPortal/Body/CompanyDashboard/CompanyProfile/CompanyProfile';
-
+import CompanyProfile from "./pages/JobPortal/Body/CompanyDashboard/CompanyProfile/CompanyProfile";
+import LoginPageCompany from "./pages/loginCompany/LoginPageCompany";
+import {
+  ApplicantPrivateRoute,
+  CompanyPrivateRoute,
+} from "./utils/CompnayPrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -29,33 +33,61 @@ const router = createBrowserRouter([
       },
       {
         path: "/jobs",
-        element: <Jobs />,
+        element: (
+          <ApplicantPrivateRoute>
+            <Jobs />
+          </ApplicantPrivateRoute>
+        ),
       },
       {
         path: "/applicantdashboard",
-        element: <ApplicantDashboard />,
+        element: (
+          <ApplicantPrivateRoute>
+            <ApplicantDashboard />
+          </ApplicantPrivateRoute>
+        ),
       },
       {
         path: "/companyDashboard",
-        element: <CompanyDashboard />,
+        element: (
+          <CompanyPrivateRoute>
+            <CompanyDashboard />
+          </CompanyPrivateRoute>
+        ),
       },
     ],
   },
   {
-    path: "/registration",
+    path: "/company-registration",
+    element: <RegistrationPageCompany />,
+  },
+  {
+    path: "/applicant-registration",
     element: <RegistrationPage />,
   },
   {
-    path: "/login",
+    path: "/applicant-login",
     element: <LoginPage />,
   },
   {
+    path: "/company-login",
+    element: <LoginPageCompany />,
+  },
+  {
     path: "/ApplicantProfile",
-    element: <ApplicantProfile />,
+    element: (
+      <ApplicantPrivateRoute>
+        <ApplicantProfile />
+      </ApplicantPrivateRoute>
+    ),
   },
   {
     path: "/Companyprofile",
-    element: <CompanyProfile />,
+    element: (
+      <CompanyPrivateRoute>
+        <CompanyProfile />
+      </CompanyPrivateRoute>
+    ),
   },
 ]);
 

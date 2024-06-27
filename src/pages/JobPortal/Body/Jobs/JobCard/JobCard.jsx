@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { FaBookmark } from "react-icons/fa";
-import { BsDot } from "react-icons/bs";
+import { FaClock } from "react-icons/fa";
+import { MdLocationPin } from "react-icons/md";
+import { FaBuilding } from "react-icons/fa";
+import { MdWork } from "react-icons/md";
 import Modal from "../ViewDeatilModal.jsx/Modal";
 
 const JobCard = ({ job }) => {
@@ -8,59 +10,51 @@ const JobCard = ({ job }) => {
   const [selectedDetails, setSelectedDetails] = useState(null);
 
   const handleCardClick = () => {
-    setSelectedDetails(job); 
+    setSelectedDetails(job);
     setShowModal(true);
   };
 
   return (
-    <div className="h-[15.6rem] bg-white p-[2rem] shadow-lg space-y-3 flex flex-col">
+    <div className="h-[15rem] bg-white p-[2rem] shadow-lg space-y-3 flex flex-col">
       <div className="flex items-center justify-between">
         <div className="flex-col flex space-y-2">
-          <h1 className="text-[#1E1E1E] text-md font-semibold">{job.title}</h1>
-          <div className="flex space-x-2 items-center justify-evenly text-sm text-[#5E6368]">
-            <h6 className="flex items-center">
-              <span>
-                <BsDot className="text-[#5E6368]" />
+          <h1 className="text-[#1E1E1E] text-md font-semibold">{job?.title}</h1>
+          <p className="text-xs text-[#5E6368]">{job.description}</p>
+          <div className="flex flex-col text-sm text-[#5E6368]">
+            <h6 className="flex">
+              <span className="mr-3">
+                <MdWork className="text-[#5E6368]" />
               </span>
-              {job.type}
+              {job?.job_type}
             </h6>
-            <h6 className="flex items-center">
-              <span>
-                <BsDot className="text-[#5E6368]" />
+            <h6 className="flex">
+              <span className="mr-3">
+                <MdLocationPin className="text-[#5E6368]" />
               </span>
-              {job.location}
+              {job?.company?.address}
             </h6>
-              <h6 className="flex items-center">
-                <span>
-                  <BsDot className="text-[#5E6368]" />
-                </span>
-                {job.remote}
-              </h6>
+            <h6 className="flex">
+              <span className="mr-3">
+                <FaClock className="text-[#5E6368]" />
+              </span>
+              {job?.job_duration}
+            </h6>
+            <h6 className="flex">
+              <span className="mr-3">
+                <FaBuilding className="text-[#5E6368]" />
+              </span>
+              {job?.company?.name}
+            </h6>
           </div>
         </div>
-        <div>
-          <FaBookmark className="cursor-pointer text-[#FFDE7F]" size={24} />
-        </div>
       </div>
-      <p className="text-xs text-[#5E6368]">{job.description}</p>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <span className="text-md font-bold text-[#1E1E1E]">{job.salary}</span>
-          <span className="text-xs text-[#5E6368]">/month</span>
-        </div>
-        <div>
-          <span className="text-xs text-[#5E6368]">{job.posted}</span>
-        </div>
-      </div>
+
       <div className="flex items-center justify-center space-x-5">
         <button
           onClick={handleCardClick}
-          className="border px-2 py-1 border-[#E7E6E6]"
+          className="px-3 py-2 bg-[#04ADE61A] text-[#04ADE6] rounded-xl hover:text-[1.05rem] duration-75"
         >
           View details
-        </button>
-        <button className="px-2 py-1 bg-[#04ADE61A] text-[#04ADE6] font-semibold">
-          Apply Now
         </button>
       </div>
 

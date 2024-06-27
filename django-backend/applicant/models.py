@@ -13,8 +13,7 @@ class Applicant(models.Model):
     )
 
 
-class Application(models.Model):
-    title = models.CharField(max_length=100)
+class Application(models.Model):    
     description = models.TextField()
     cv = models.URLField()
     STATUS = (

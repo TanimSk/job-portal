@@ -3,25 +3,42 @@ import Jobapplied from "./Job applied/Jobapplied";
 // import FormModal from "./FormModal/FormModal";
 import ApplicantNavbar from "./ApplicantNavbar/ApplicantNavbar";
 import style from "../../../../style";
-
-const ApplicantDashboard1 = [
-  {
-    Name: "Md Tofaal Ahmed",
-    Age: "20",
-    university: "University of Rajshahi",
-    subject: "Computer Science and Engineering",
-    description:
-      "I am highly proficient in Video Editing, leveraging my expertise to deliver exceptional results in various projects and initiatives.",
-    JobRole: "Video Editor",
-  },
-];
+import { apiURL } from "../../../../Constant";
+import { useEffect } from "react";
+import { loadFromLocalStorage } from "../../../../utils/manageLocalStorage";
 
 const ApplicantDashboard = () => {
-  // const [showFormModal, setShowFormModal] = useState(false);
+  const [applicantInfo, setApplicantData] = useState({
+    name: "",
+    university_name: "",
+    major: "",
+    description: "",
+  });
+  const [isLoading, setLoading] = useState(true);
 
-  // const handleCardClick = () => {
-  //   setShowFormModal(true);
-  // };
+  // get profile info
+  useEffect(() => {
+    let token = loadFromLocalStorage("applicant");
+
+    fetch(`${apiURL}/applicant/profile/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return null;
+      })
+      .then((data) => {
+        // console.log(data);
+        if (data == null) return;
+        setLoading(false);
+        setApplicantData(data);
+      });
+  }, []);
 
   return (
     <div>
@@ -32,47 +49,43 @@ const ApplicantDashboard = () => {
           </div>
         </div>
       </div>
-      <section className="pt-10 h-screen overflow-hidden bg-gray-50 md:pt-0 sm:pt-16 2xl:pt-16">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="grid items-center grid-cols-1 md:grid-cols-2">
-            <div>
-              {/* Iterate over ApplicantDashboard1 array to display each applicant's details */}
-              {ApplicantDashboard1.map((item, index) => (
-                <div key={index}>
+
+      {!isLoading ? (
+        <section className="pt-10 h-screen overflow-hidden bg-gray-50 md:pt-0 sm:pt-16 2xl:pt-16">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+            <div className="grid items-center grid-cols-1 md:grid-cols-2">
+              <div>
+                {/* Iterate over ApplicantDashboard1 array to display each applicant's details */}
+                <div>
                   <h2 className="text-3xl font-bold text-[#3670a3] leading-tight  sm:text-4xl lg:text-5xl">
-                    Name: {item.Name}
+                    {applicantInfo.name}
                   </h2>
                   <p className="max-w-lg flex flex-col space-y-1  mt-3 text-xl leading-relaxed text-gray-600 md:mt-8">
-                    <span className="text-[#3670a3]">
-                      <span className="font-bold text-[#3670a3]"> Age: </span>
-                      <span className="text-[#3670a3]"> {item.Age}</span>
-                    </span>
                     <span>
                       <span className="font-bold text-[#3670a3]">
                         University:{" "}
                       </span>
-                      <span className="text-[#3670a3]">{item.university}</span>
+                      <span className="text-[#3670a3]">
+                        {applicantInfo.university_name}
+                      </span>
                     </span>
                     <span>
                       <span className="font-bold text-[#3670a3]">
                         Subject:{" "}
                       </span>
-                      <span className="text-[#3670a3]"> {item.subject}</span>
-                    </span>
-                    <span>
-                      <span className="font-bold text-[#3670a3]">
-                        Description:{" "}
-                      </span>
                       <span className="text-[#3670a3]">
                         {" "}
-                        {item.description}
+                        {applicantInfo.major}
                       </span>
                     </span>
                     <span>
                       <span className="font-bold text-[#3670a3]">
-                        Job Role:{" "}
+                        Description:
                       </span>
-                      <span className="text-[#3670a3]"> {item.JobRole}</span>
+                      <br />
+                      <span className="text-[#3670a3]">                        
+                        {applicantInfo.description}
+                      </span>
                     </span>
                   </p>
                   {/* <div
@@ -82,29 +95,36 @@ const ApplicantDashboard = () => {
                     Resume
                   </div> */}
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="relative">
-              <img
-                className="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
-                src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg"
-                alt=""
-              />
+              <div className="relative">
+                <img
+                  className="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
+                  src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg"
+                  alt=""
+                />
 
-              <img
-                className="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110"
-                src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/business-woman.png"
-                alt=""
-              />
+                <img
+                  className="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110"
+                  src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/business-woman.png"
+                  alt=""
+                />
+              </div>
             </div>
           </div>
-        </div>
-        {/* <FormModal
+          {/* <FormModal
           isVisible={showFormModal}
           onClose={() => setShowFormModal(false)}
         /> */}
-      </section>
+        </section>
+      ) : (
+        <div className="flex h-screen w-full">
+          <div className="m-auto text-center font-bold text-[1.5rem]">
+            <h3 className="text-gray-600">Loading</h3>
+          </div>
+        </div>
+      )}
+
       {/* Job Applied */}
       <section>
         <Jobapplied />

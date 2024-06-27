@@ -3,40 +3,94 @@ import { useForm } from "react-hook-form";
 import { LuCamera } from "react-icons/lu";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
-
 import jobAnimation from "../../assets/loginAnimation.gif";
-import Avater from "../../assets/About.jpeg";
+import Avatar from "../../assets/upload.png";
+import axios from "axios";
+import { apiURL } from "../../Constant";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const RegistrationPage = () => {
+  const navigate = useNavigate();
+
   // State for image preview
-  const [image, setImage] = useState(Avater);
+  const [image, setImage] = useState(Avatar);
   const [clicked, setclicked] = useState(false);
 
   // Handle image change
   const handleClick = () => {
     setclicked(true);
   };
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   // Form handling with react-hook-form
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Image = e.target.result;
+        setImage(base64Image);
+        uploadToImgbb(base64Image);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadToImgbb = async (base64Image) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", base64Image.split(",")[1]); // Remove the data:image/png;base64, part
+      const response = await axios.post(
+        "https://api.imgbb.com/1/upload",
+        formData,
+        {
+          params: {
+            key: "ed67a942812ea90bf6e8f65a6c43c091",
+          },
+        }
+      );
+      console.log(response.data.data.url);
+      setValue("profile_img", response.data.data.url); // Set the img_url field in the form
+    } catch (error) {
+      console.error("Error uploading image to imgbb", error);
+    }
+  };
+
   const onSubmit = (data) => {
-    // Handle form submission, you can console log or process the data as needed
+    if (!("profile_img" in data)) {
+      alert("Please upload your profile image");
+      return;
+    }
+    if (data["password1"] !== data["password2"]) {
+      alert("The passwords do not match");
+      return;
+    }
+
     console.log(data);
+
+    fetch(`${apiURL}/applicant/registration/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.ok) {
+          navigate("/company-login");
+        }
+        return res.text();
+      })
+      .then((data) => {
+        alert("Couldn't create an account for you, try again");
+        console.log(data);
+      });
   };
 
   return (
@@ -63,7 +117,7 @@ const LoginPage = () => {
             {/* Upload Image */}
             <div className={`flex  flex-col items-center space-y-3`}>
               <img
-                className="object-cover w-32 h-32 rounded-full ring-2 ring-purple-500 cursor-pointer"
+                className="object-cover w-32 h-32 ring-2 ring-purple-500 p-2 rounded-2xl"
                 src={image}
                 alt="Avatar"
               />
@@ -75,13 +129,71 @@ const LoginPage = () => {
                   <LuCamera className="text-slate-500" size={20} />
                 </div>
                 <input
-                  {...register("profilePicture")}
+                  // {...register("profilePicture")}
                   type="file"
                   id="fileInput"
                   className="hidden"
                   onChange={handleImageChange}
                 />
               </label>
+
+              <input
+                {...register("name", { required: "Name is required" })}
+                className="p-2 rounded-xl border"
+                type="text"
+                placeholder="Your name"
+              />
+
+              <input
+                {...register("email", { required: "Email is required" })}
+                className="p-2 rounded-xl border w-full"
+                type="email"
+                placeholder="Email"
+              />
+              <div className="relative">
+                <input
+                  {...register("password1", {
+                    required: "Password is required",
+                  })}
+                  className="p-2 rounded-xl border w-full"
+                  type="password"
+                  placeholder="Password"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="gray"
+                  className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                </svg>
+              </div>
+
+              <div className="relative">
+                <input
+                  {...register("password2", {
+                    required: "Password is required",
+                  })}
+                  className="p-2 rounded-xl border w-full"
+                  type="password"
+                  placeholder="Confirm Password"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="gray"
+                  className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                </svg>
+              </div>
+
               {/* Next Arrow */}
               <div
                 onClick={handleClick}
@@ -94,7 +206,7 @@ const LoginPage = () => {
             {/* Form */}
             <div
               className={`${
-                clicked ? "bottom-2" : "absolute-div bottom-[-100rem]"
+                clicked ? "bottom-2 pb-[5rem] pt-[5rem]" : "absolute-div bottom-[-100rem]"
               } duration-500 absolute  bg-[#F3F4F6]`}
             >
               <div
@@ -103,7 +215,7 @@ const LoginPage = () => {
               >
                 <div className="flex space-x-3 items-center justify-center">
                   <h2 className="font-bold whitespace-no-wrap text-2xl text-[#002D74] mb-5">
-                    Company Registration
+                    Applicant Registration
                   </h2>
                   <div
                     onClick={() => setclicked(false)}
@@ -116,47 +228,21 @@ const LoginPage = () => {
                 {/* Form Inputs */}
                 <div className="flex flex-col gap-4">
                   <input
-                    {...register("name", { required: "Name is required" })}
-                    className="p-2 rounded-xl border"
-                    type="text"
-                    placeholder="Company Name"
-                  />
-
-                  <input
-                    {...register("email", { required: "Email is required" })}
-                    className="p-2 rounded-xl border w-full"
-                    type="email"
-                    placeholder="Email"
-                  />
-                  <div className="relative">
-                    <input
-                      {...register("password", {
-                        required: "Password is required",
-                      })}
-                      className="p-2 rounded-xl border w-full"
-                      type="password"
-                      placeholder="Password"
-                    />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="gray"
-                      className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                    </svg>
-                  </div>
-
-                  <input
-                    {...register("address", {
-                      required: "Address is required",
+                    {...register("university_name", {
+                      required: "University is required",
                     })}
                     className="p-2 rounded-xl border w-full"
                     type="text"
-                    placeholder="Address"
+                    placeholder="Your University Name"
+                  />
+
+                  <input
+                    {...register("major", {
+                      required: "Major is required",
+                    })}
+                    className="p-2 rounded-xl border w-full"
+                    type="text"
+                    placeholder="Your Major"
                   />
 
                   <textarea
@@ -182,9 +268,14 @@ const LoginPage = () => {
                 </div>
 
                 {/* Login Link */}
-                <div className="mt-3 space-x-3 text-xs flex justify-between items-center text-[#002D74]">
+                <div className="mt-3 space-x-3 text-xs flex justify-between items-center text-[#002D74] mb-4">
                   <p>Already have an account?</p>
-                  <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">
+                  <button
+                    className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300"
+                    onClick={() => {
+                      navigate("/applicant-login");
+                    }}
+                  >
                     Login
                   </button>
                 </div>
@@ -197,4 +288,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegistrationPage;

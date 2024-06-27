@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { BsFillSignpostFill } from "react-icons/bs";
+import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
+import { apiURL } from "../../../../../Constant";
 
 const Modal = ({ isVisible, onClose }) => {
   const [jobData, setJobData] = useState({
-    name: "",
-    location: "",
+    title: "",
     description: "",
-    type: "Full-Time",
-    onsite: true,
-    salary: "$",
+    job_type: "On-site",
+    job_duration: "Full-Time",
   });
 
   const handleInputChange = (e) => {
@@ -26,16 +26,35 @@ const Modal = ({ isVisible, onClose }) => {
     e.preventDefault();
     console.log("Job Data:", jobData);
 
-    // Perform further actions like submitting the data to backend, etc.
+    let token = loadFromLocalStorage("company");
+
+    fetch(`${apiURL}/company/job-post/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(jobData),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return null;
+      })
+      .then((data) => {
+        if (data == null) return;
+        alert("Successfully created the job post");
+        location.reload();
+      });
 
     // Clear form fields
     setJobData({
       name: "",
       location: "",
       description: "",
-      type: "Full-Time",
-      onsite: true,
-      salary: "$",
+      job_type: "On-site",
+      job_duration: "Full-Time",
     });
 
     // Close the modal
@@ -49,11 +68,11 @@ const Modal = ({ isVisible, onClose }) => {
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-25 backdrop-blur-sm bg-black"
+      className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-25 backdrop-blur-sm bg-black p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-8 max-w-md mx-auto rounded-md z-50"
+        className="bg-white p-8 w-[50vw] max-w-[30rem] min-w-[10rem] mx-auto rounded-md z-50"
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-[#3670A3]">Post Job</h2>
@@ -68,28 +87,13 @@ const Modal = ({ isVisible, onClose }) => {
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col mb-4">
             <label htmlFor="name" className="text-sm text-[#3670A3]">
-              Job Name
+              Job Title
             </label>
             <input
               type="text"
               id="name"
-              name="name"
-              value={jobData.name}
-              onChange={handleInputChange}
-              className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-
-          <div className="flex flex-col mb-4">
-            <label htmlFor="location" className="text-sm text-[#3670A3]">
-              Job Location
-            </label>
-            <input
-              type="text"
-              id="location"
-              name="location"
-              value={jobData.location}
+              name="title"
+              value={jobData.title}
               onChange={handleInputChange}
               className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -115,31 +119,33 @@ const Modal = ({ isVisible, onClose }) => {
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="time"
-                  value="Full-Time"
-                  onChange={handleInputChange}
-                  className="mr-2"
-                />
-                Remote
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="time"
-                  value="Part-Time"
+                  name="job_type"
+                  value="On-site"
+                  checked={jobData.job_type === "On-site"}
                   onChange={handleInputChange}
                   className="mr-2"
                 />
                 On-site
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="job_type"
+                  value="Remote"
+                  onChange={handleInputChange}
+                  className="mr-2"
+                  checked={jobData.job_type === "Remote"}
+                />
+                Remote
               </label>
             </div>
             <div className="flex items-center space-x-3">
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="type"
+                  name="job_duration"
                   value="Full-Time"
-                  checked={jobData.type === "Full-Time"}
+                  checked={jobData.job_duration === "Full-Time"}
                   onChange={handleInputChange}
                   className="mr-2"
                 />
@@ -148,9 +154,9 @@ const Modal = ({ isVisible, onClose }) => {
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="type"
+                  name="job_duration"
                   value="Part-Time"
-                  checked={jobData.type === "Part-Time"}
+                  checked={jobData.job_duration === "Part-Time"}
                   onChange={handleInputChange}
                   className="mr-2"
                 />
@@ -159,22 +165,7 @@ const Modal = ({ isVisible, onClose }) => {
             </div>
           </div>
 
-          <div className="flex flex-col mb-4">
-            <label htmlFor="salary" className="text-sm text-[#3670A3]">
-              Salary
-            </label>
-            <input
-              type="text"
-              id="salary"
-              name="salary"
-              value={jobData.salary}
-              onChange={handleInputChange}
-              className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-
-          <div className="flex items-center justify-center space-x-4 mt-4">
+          <div className="flex items-center justify-center space-x-4 mt-[4rem]">
             <button
               type="submit"
               className="bg-[#3670A3] flex items-center justify-center hover:bg-[#5e93c2] rounded-md px-3 py-2 cursor-pointer text-md font-semibold text-white space-x-2"

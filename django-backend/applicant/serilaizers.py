@@ -1,7 +1,7 @@
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from allauth.account.models import EmailAddress
-from applicant.models import Applicant
+from applicant.models import Applicant, Application
 
 
 class CustomRegistrationSerializer(RegisterSerializer):
@@ -53,3 +53,19 @@ class ApplicantSerializer(serializers.ModelSerializer):
     class Meta:
         fields = "__all__"
         model = Applicant
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    status = serializers.CharField(required=False, allow_blank=True)
+    applicant = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        fields = "__all__"
+        model = Application
+
+
+class GetApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = "__all__"
+        model = Application
+        depth = 2

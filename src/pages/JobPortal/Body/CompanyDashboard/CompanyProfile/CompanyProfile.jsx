@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import style from "../../../../../style";
 import CompanyNav from "../CompanyNav/CompanyNav";
-import Avater from "../../../../../assets/About.jpeg";
 import { LuCamera } from "react-icons/lu";
 import { IoSave } from "react-icons/io5";
+import { useEffect } from "react";
+import axios from "axios";
+import { apiURL } from "../../../../../Constant";
+import { loadFromLocalStorage, removeFromLocalStorage } from "../../../../../utils/manageLocalStorage";
+import { useNavigate } from "react-router-dom";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const CompanyProfile = () => {
-  const [image, setImage] = useState(Avater);
+  const navigate = useNavigate();
+  const [image, setImage] = useState("");
   const [isEditing, setIsEditing] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    name: "Tesla",
-    email: "Tesla@gmail.com",
-    location: "Deer Creek Road, Palo Alto, CA 94304, USA",
-    description: "We Make!",
+    name: "",
+    image: "",
+    address: "",
+    description: "",
   });
 
   const handleImageChange = (event) => {
@@ -21,6 +28,7 @@ const CompanyProfile = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         setImage(e.target.result);
+        uploadToImgbb(e.target.result);
       };
       reader.readAsDataURL(file);
     }
@@ -35,6 +43,79 @@ const CompanyProfile = () => {
   };
   console.log(formData);
 
+  // upload to imgbb API
+  const uploadToImgbb = async (base64Image) => {
+    try {
+      const _formData = new FormData();
+      _formData.append("image", base64Image.split(",")[1]);
+      const response = await axios.post(
+        "https://api.imgbb.com/1/upload",
+        _formData,
+        {
+          params: {
+            key: "ed67a942812ea90bf6e8f65a6c43c091",
+          },
+        }
+      );
+      console.log(response.data.data.url);
+      setFormData({ ...formData, image: response.data.data.url });
+    } catch (error) {
+      console.error("Error uploading image to imgbb", error);
+    }
+  };
+
+  // update profile info
+  const updateProfile = () => {
+    let token = loadFromLocalStorage("company");
+
+    console.log("submitting data:", formData);
+    setIsEditing(false);
+    fetch(`${apiURL}/company/profile/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return null;
+      })
+      .then((data) => {
+        if (data == null) return;
+        setIsEditing(true);
+        alert("Successfully updated profile");
+      });
+  };
+
+  // get profile info
+  useEffect(() => {
+    let token = loadFromLocalStorage("company");
+
+    fetch(`${apiURL}/company/profile/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return null;
+      })
+      .then((data) => {
+        console.log(data);
+        if (data == null) return;
+        setLoading(false);
+        setFormData(data);
+        setImage(data?.image);
+      });
+  }, []);
+
   return (
     <div className="bg-[#F9FAFB] min-h-screen">
       <div className="w-full shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
@@ -45,126 +126,126 @@ const CompanyProfile = () => {
         </div>
       </div>
 
-      <form className="mx-auto mt-8 max-w-xs md:max-w-md">
-        <div className="flex flex-col items-center space-y-3">
+      {!isLoading ? (
+        <form className="mx-auto mt-8 max-w-xs md:max-w-md">
+          <div className="flex flex-col items-center space-y-3">
             {/* image */}
-          <div className="relative">
-            <img
-              className="object-cover w-20 h-20 rounded-full ring-2 ring-[#9773DF] cursor-pointer"
-              src={image}
-              alt="Avatar"
-            />
-            <label
-              htmlFor="fileInput"
-              className="absolute bottom-0 right-0 cursor-pointer"
-            >
-              <div className="p-1 bg-[#9773DF] rounded-full">
-                <LuCamera size={20} className="text-white" />
+            <div className="relative">
+              <img
+                className="object-cover w-20 h-20 rounded-full ring-2 ring-[#9773DF] cursor-pointer"
+                src={image}
+                alt="Avatar"
+              />
+              <label
+                htmlFor="fileInput"
+                className="absolute bottom-0 right-0 cursor-pointer"
+              >
+                <div className="p-1 bg-[#9773DF] rounded-full">
+                  <LuCamera size={20} className="text-white" />
+                </div>
+                <input
+                  type="file"
+                  id="fileInput"
+                  className="hidden"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
+
+            <div className="grid w-full grid-cols-1 gap-5 mt-4">
+              {/* form */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+                    isEditing ? "" : "cursor-not-allowed"
+                  }`}
+                  readOnly={!isEditing}
+                />
               </div>
-              <input
-                type="file"
-                id="fileInput"
-                className="hidden"
-                onChange={handleImageChange}
-              />
-            </label>
-          </div>
 
-          <div className="grid w-full grid-cols-1 gap-5 mt-4">
-            {/* form */}
-            <div>
-              <label
-                htmlFor="name"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Company Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
-                  isEditing ? "" : "cursor-not-allowed"
-                }`}
-                readOnly={!isEditing}
-              />
+              <div>
+                <label
+                  htmlFor="location"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Address
+                </label>
+                <input
+                  type="location"
+                  id="location"
+                  name="location"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+                    isEditing ? "" : "cursor-not-allowed"
+                  }`}
+                  readOnly={!isEditing}
+                />
+              </div>
+
+              <div className="row-span-3">
+                <label
+                  htmlFor="description"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+                    isEditing ? "" : "cursor-not-allowed"
+                  }`}
+                  readOnly={!isEditing}
+                />
+              </div>
             </div>
 
-            <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900"
+            <div className="flex items-center justify-center mt-6">
+              <button
+                type="button"
+                onClick={() => {
+                  updateProfile();
+                }}
+                className="bg-[#9773DF] flex items-center justify-center space-x-3 hover:bg-[#a782f0] rounded-md px-4 py-2 cursor-pointer hover:scale-105 duration-300 text-md font-semibold text-white"
               >
-                Email address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
-                  isEditing ? "" : "cursor-not-allowed"
-                }`}
-                readOnly={!isEditing}
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="location"
-                className="block mb-2 text-sm font-medium text-gray-900"
+                <IoSave size={17} />
+                <span>Save Changes</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  removeFromLocalStorage("company");
+                  navigate("/");
+                }}
+                className="ml-4 bg-[#9773DF] flex items-center justify-center space-x-3 hover:bg-[#a782f0] rounded-md px-4 py-2 cursor-pointer hover:scale-105 duration-300 text-md font-semibold text-white"
               >
-                Location
-              </label>
-              <input
-                type="location"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
-                  isEditing ? "" : "cursor-not-allowed"
-                }`}
-                readOnly={!isEditing}
-              />
-            </div>
-
-            <div className="row-span-3">
-              <label
-                htmlFor="description"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
-                  isEditing ? "" : "cursor-not-allowed"
-                }`}
-                readOnly={!isEditing}
-              />
+                <FaSignOutAlt size={17} />
+                <span>Logout</span>
+              </button>
             </div>
           </div>
-
-          <div className="flex items-center justify-center mt-6">
-            <button
-              type="button"
-              onClick={() => setIsEditing(!isEditing)}
-              className="bg-[#9773DF] flex items-center justify-center space-x-3 hover:bg-[#a782f0] rounded-md px-4 py-2 cursor-pointer hover:scale-105 duration-300 text-md font-semibold text-white"
-            >
-              <IoSave size={17} />
-              <span>Save Changes</span>
-            </button>
+        </form>
+      ) : (
+        <div className="flex h-screen w-full">
+          <div className="m-auto text-center font-bold text-[1.5rem]">
+            <h3 className="text-gray-600">Loading</h3>
           </div>
-
         </div>
-      </form>
+      )}
     </div>
   );
 };

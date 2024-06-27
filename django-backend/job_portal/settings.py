@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # DRF
     "rest_framework",
     "rest_framework.authtoken",
-    "rest_framework_simplejwt",
     # All Auth
     "dj_rest_auth",
     "django.contrib.sites",
@@ -54,7 +53,6 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
-    "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
     # App
     "applicant.apps.ApplicantConfig",
@@ -128,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_RENDERER_CLASSES": (
         "rest_framework.renderers.JSONRenderer",

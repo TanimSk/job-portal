@@ -1,9 +1,8 @@
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from allauth.account.models import EmailAddress
-
-from applicant.models import Applicant
 from company.models import JobPost, Company
+from applicant.models import Application
 
 
 class CustomRegistrationSerializer(RegisterSerializer):
@@ -30,12 +29,11 @@ class CustomRegistrationSerializer(RegisterSerializer):
     def save(self, request):
         user = super(CustomRegistrationSerializer, self).save(request)
         user.save()
-        instance = Applicant(
-            applicant=user,
+        instance = Company(
+            company=user,
             name=self.cleaned_data.get("name"),
-            profile_img=self.cleaned_data.get("profile_img"),
-            university_name=self.cleaned_data.get("university_name"),
-            major=self.cleaned_data.get("major"),
+            image=self.cleaned_data.get("image"),
+            address=self.cleaned_data.get("address"),
             description=self.cleaned_data.get("description"),
         )
         instance.save()
@@ -61,3 +59,10 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         fields = "__all__"
         model = Company
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = "__all__"
+        model = Application
+        depth = 1

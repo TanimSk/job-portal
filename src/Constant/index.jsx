@@ -2,14 +2,14 @@ import { FaBuilding } from "react-icons/fa";
 import { IoIosPaper } from "react-icons/io";
 import { BsPeopleFill } from "react-icons/bs";
 
+import web from "../assets/About.jpeg";
+import app from "../assets/About.jpeg";
+import data from "../assets/About.jpeg";
+import market from "../assets/About.jpeg";
+import video from "../assets/About.jpeg";
+import peoplw from "../assets/About.jpeg";
 
-import web from '../assets/About.jpeg'
-import app from '../assets/About.jpeg'
-import data from '../assets/About.jpeg'
-import market from '../assets/About.jpeg'
-import video from '../assets/About.jpeg'
-import peoplw from '../assets/About.jpeg'
-
+export const apiURL = "http://127.0.0.1:8000";
 export const jobsCompanies = [
   {
     tittle: "LiveJobs",
@@ -45,62 +45,61 @@ export const Applicants1 = [
   {
     name: "Md Tofaal Ahmed",
     img: web,
-    jobrole:"Video Editor",
-    university:"University Of Rajshahi"
+    jobrole: "Video Editor",
+    university: "University Of Rajshahi",
   },
   {
     name: "Tanim Sk",
     img: web,
-    jobrole:"Hacker",
-    university:"University Of Rajshahi"
+    jobrole: "Hacker",
+    university: "University Of Rajshahi",
   },
   {
     name: "Tofajjul Islam",
     img: web,
-    jobrole:"Game developer",
-    university:"University Of Rajshahi"
+    jobrole: "Game developer",
+    university: "University Of Rajshahi",
   },
 ];
 export const Applicants2 = [
   {
     name: "Naiem Siddeki",
     img: web,
-    jobrole:"Influencer",
-    university:"University Of Rajshahi"
+    jobrole: "Influencer",
+    university: "University Of Rajshahi",
   },
   {
     name: "Hasnat Shafi",
     img: web,
-    jobrole:"App Developer",
-    university:"University Of Rajshahi"
+    jobrole: "App Developer",
+    university: "University Of Rajshahi",
   },
   {
     name: "Ramim Sabil",
     img: web,
-    jobrole:"Matchine Language expert",
-    university:"University Of Rajshahi"
+    jobrole: "Matchine Language expert",
+    university: "University Of Rajshahi",
   },
 ];
 export const FeaturedJobsgroup1 = [
   {
     tittle: "Web Develpment",
-    img:web,
+    img: web,
     jobtime: "Full-Time",
     location: "Dhaka",
   },
   {
     tittle: "Machine Learning",
-    img:peoplw,
+    img: peoplw,
     jobtime: "Part-Time",
     location: "Khulna",
   },
   {
     tittle: "Marketting",
-    img:market,
+    img: market,
     jobtime: "Full-Time",
     location: "Japan",
   },
-  
 ];
 export const FeaturedJobsgroup2 = [
   {
@@ -110,18 +109,17 @@ export const FeaturedJobsgroup2 = [
     location: "Dhaka",
   },
   {
-    img:video,
+    img: video,
     tittle: "Video Editing",
     jobtime: "Part-Time",
     location: "Khulna",
   },
   {
-    img:app,
+    img: app,
     tittle: "App Developement",
     jobtime: "Full-Time",
     location: "Japan",
   },
-  
 ];
 export const JobCard1 = [
   {

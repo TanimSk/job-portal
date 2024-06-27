@@ -3,6 +3,9 @@ import JobCard from "./JobCard/JobCard";
 import { JobCard1 } from "../../../../Constant";
 import style from "../../../../style";
 import Navbar from "../../Navbar/Navbar";
+import { apiURL } from "../../../../Constant";
+import { loadFromLocalStorage } from "../../../../utils/manageLocalStorage";
+import { useEffect } from "react";
 
 const Jobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -10,12 +13,35 @@ const Jobs = () => {
   const [location, setLocation] = useState("");
   const [experienceLevel, setExperienceLevel] = useState("");
 
+  const [loading, setLoading] = useState(true);
+  const [jobs, setJobs] = useState([]);
 
-  const filteredJobs = JobCard1.filter((job) => {
+  useEffect(() => {
+    let token = loadFromLocalStorage("applicant");
+
+    fetch(`${apiURL}/applicant/all-jobs/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return null;
+      })
+      .then((data) => {
+        console.log(data);
+        if (data == null) return;
+        setLoading(false);
+        setJobs(data);
+      });
+  }, []);
+
+  const filteredJobs = jobs.filter((job) => {
     return (
-      (jobType ? job.type === jobType : true) &&
-      (location ? job.location === location : true) &&
-      (experienceLevel ? job.experienceLevel === experienceLevel : true) &&
+      (jobType ? job.job_duration === jobType : true) &&
       (searchTerm
         ? job.title.toLowerCase().includes(searchTerm.toLowerCase())
         : true)
@@ -51,40 +77,24 @@ const Jobs = () => {
               value={jobType}
               onChange={(e) => setJobType(e.target.value)}
             >
-              <option value="">All Job Types</option>
+              <option value="">Job Duration</option>
               <option value="Full-Time">Full-Time</option>
               <option value="Part-Time">Part-Time</option>
-              <option value="Contract">Contract</option>
-              <option value="Internship">Internship</option>
             </select>
-            <select
-              className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#9773df]"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            >
-              <option value="">All Locations</option>
-              <option value="Dhaka">Dhaka</option>
-              <option value="Rajshahi">Rajshahi</option>
-              <option value="Khulna">Khulna</option>
-              <option value="Tangail">Tangail</option>
-              <option value="Sylhet">Sylhet</option>
-            </select>
-            {/* <select
-            className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#9773df]"
-            value={experienceLevel}
-            onChange={(e) => setExperienceLevel(e.target.value)}
-          >
-            <option value="">All Experience Levels</option>
-            <option value="Entry Level">Entry Level</option>
-            <option value="Mid Level">Mid Level</option>
-            <option value="Senior Level">Senior Level</option>
-          </select> */}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center justify-center">
-            {filteredJobs.map((job, index) => {
-              return <JobCard key={index} job={job} index={index} />;
-            })}
-          </div>
+          {!loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center justify-center">
+              {filteredJobs.map((job, index) => {
+                return <JobCard key={index} job={job} index={index} />;
+              })}
+            </div>
+          ) : (
+            <div className="flex h-screen w-full">
+              <div className="m-auto text-center font-bold text-[1.5rem]">
+                <h3 className="text-gray-600">Loading</h3>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

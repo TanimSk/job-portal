@@ -11,7 +11,6 @@ const Navbar = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-     
       gsap.from("#headlineLogo", {
         y: -40,
         opacity: 0,
@@ -20,12 +19,12 @@ const Navbar = () => {
       gsap.from("#navitems #navitem", {
         y: -40,
         opacity: 0,
-        delay:0.4,
-        stagger:0.2
+        delay: 0.4,
+        stagger: 0.1,
       });
     }, comp);
 
-    return () => ctx.revert(); 
+    return () => ctx.revert();
   }, []);
   // Main
   const [openClose, setopenClose] = useState(true);

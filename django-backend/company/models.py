@@ -19,3 +19,5 @@ class JobPost(models.Model):
     company = models.ForeignKey(
         Company, on_delete=models.CASCADE, related_name="company_job_post"
     )
+    job_type = models.CharField(max_length=100)
+    job_duration = models.CharField(max_length=100)
