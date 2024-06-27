@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 // Gsap
 import gsap from "gsap";
+import { existsInLocalStorage } from "../../../utils/manageLocalStorage";
 
 const Navbar = () => {
   // Gsap
@@ -70,6 +71,18 @@ const Navbar = () => {
         >
           Home
         </div>
+        {existsInLocalStorage("applicant") && (
+          <div
+            id="navitem"
+            onClick={() => {
+              navigate("/applicantdashboard");
+            }}
+            className="nav-item  cursor-pointer font-semibold"
+          >
+            Dashboard
+          </div>
+        )}
+
         <div
           id="navitem"
           onClick={() => {
@@ -107,6 +120,15 @@ const Navbar = () => {
             className="nav-item  cursor-pointer font-semibold"
           >
             Home
+          </div>
+
+          <div
+            onClick={() => {
+              navigate("/applicantdashboard");
+            }}
+            className="nav-item  cursor-pointer font-semibold"
+          >
+            Dashboard
           </div>
           <div
             onClick={() => {

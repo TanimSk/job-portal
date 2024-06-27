@@ -13,6 +13,7 @@ export const CompanyPrivateRoute = ({ children }) => {
 };
 
 export const ApplicantPrivateRoute = ({ children }) => {
+  const location = useLocation();
   return existsInLocalStorage("applicant") ? (
     children
   ) : (

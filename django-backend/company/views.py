@@ -11,6 +11,7 @@ from company.serializers import (
 )
 from company.models import JobPost, Company
 from applicant.models import Application
+from django.core.mail import send_mail
 
 
 # Agent Registration
@@ -84,4 +85,11 @@ class applicantsAPI(APIView):
         application = Application.objects.get(id=applicant_id)
         application.status = status
         application.save()
+        send_mail(
+            "Your Application Update",
+            f"Greetings, your application for '{application.job_post.title}' post has been {status}.",
+            "from@example.com",
+            ["to@example.com"],
+            fail_silently=False,
+        )
         return Response({"status": "Successful"})

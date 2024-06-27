@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../../../../assets/loginAnimation.gif";
 import Profile from "../../../../../assets/About.jpeg";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { existsInLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -39,6 +39,17 @@ const Navbar = () => {
         >
           Home
         </div>
+        {existsInLocalStorage("applicant") && (
+          <div
+            id="navitem"
+            onClick={() => {
+              navigate("/applicantdashboard");
+            }}
+            className="nav-item  cursor-pointer font-semibold"
+          >
+            Dashboard
+          </div>
+        )}
         <div
           onClick={() => {
             navigate("/jobs");
@@ -94,6 +105,15 @@ const Navbar = () => {
             className="nav-item  cursor-pointer font-semibold"
           >
             Home
+          </div>
+
+          <div
+            onClick={() => {
+              navigate("/applicantdashboard");
+            }}
+            className="nav-item  cursor-pointer font-semibold"
+          >
+            Dashboard
           </div>
           <div
             onClick={() => {

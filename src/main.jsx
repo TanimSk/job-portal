@@ -20,7 +20,7 @@ import LoginPageCompany from "./pages/loginCompany/LoginPageCompany";
 import {
   ApplicantPrivateRoute,
   CompanyPrivateRoute,
-} from "./utils/CompnayPrivateRoute";
+} from "./utils/PrivateRoute";
 
 const router = createBrowserRouter([
   {

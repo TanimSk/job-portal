@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { apiURL } from "../../../../../Constant";
 import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { chunkArray } from "../../../../../utils/functions";
+import EditFormModal from "../EditFormModal/EditFormModal";
 
 const Card = () => {
   const [form, setform] = useState(false);
@@ -78,7 +79,7 @@ const Card = () => {
   return (
     <div className="space-y-5 bg-[#F9FAFB] mt-[3rem]">
       <h1 className="text-4xl font-bold text-center text-[#3670a3]">
-        Posted Job ...
+        Posted Jobs
       </h1>
       <div className="container mx-auto px-4 py-12 shadow-lg">
         <Swiper
@@ -138,7 +139,7 @@ const Card = () => {
                             }}
                             className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-6 rounded-full hover:bg-white"
                           >
-                            View
+                            Edit
                           </button>
                           <button
                             className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white"
@@ -159,11 +160,14 @@ const Card = () => {
         </Swiper>
       </div>
       {/* FormModal */}
-      <FormModal
-        isVisible={form}
-        onClose={() => setform(false)}
-        jobDetails={modalJob}
+      <EditFormModal
+       isVisible={form}
+       onClose={() => setform(false)}
+       jobDetails={modalJob}
       />
+      {/* <FormModal
+       
+      /> */}
     </div>
   );
 };

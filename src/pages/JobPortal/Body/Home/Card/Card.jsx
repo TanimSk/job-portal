@@ -64,9 +64,9 @@ const Card = () => {
                         <MdLocationPin className="text-white" size={20} />
                         <span>{item.location}</span>
                       </p>
-                      <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
+                      {/* <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
                         Apply Now
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ const Card = () => {
                 >
                   <div className="max-w-sm bg-black border shadow-lg border-gray-200 rounded-lg">
                     <img
-                      className="rounded-t-lg w-[20rem] object-cover h-[12rem] object-cover"
+                      className="rounded-t-lg w-[20rem] object-cover h-[12rem]"
                       src={item.img}
                       alt={item.tittle}
                     />
@@ -98,9 +98,9 @@ const Card = () => {
                         <MdLocationPin className="text-white" size={20} />
                         <span>{item.location}</span>
                       </p>
-                      <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
+                      {/* <button className="bg-transparent border-2 border-white hover:border-black hover:text-black text-white font-bold py-2 px-4 rounded-full hover:bg-white">
                         Apply Now
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
