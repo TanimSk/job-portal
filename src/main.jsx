@@ -76,7 +76,7 @@ const router = createBrowserRouter([
   },
   
   {
-    path: "/apiadd",
+    path: "/job-api",
     element:<Apiadd/>,
   },
   {

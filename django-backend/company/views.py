@@ -88,8 +88,8 @@ class applicantsAPI(APIView):
         send_mail(
             "Your Application Update",
             f"Greetings, your application for '{application.job_post.title}' post has been {status}.",
-            "from@example.com",
-            ["to@example.com"],
+            "noreply.service.tanimsk@gmail.com",
+            [application.applicant.applicant.email],
             fail_silently=False,
         )
         return Response({"status": "Successful"})

@@ -4,7 +4,7 @@ import Navbar from "../../Navbar/Navbar";
 import AboutUs from "./AboutUs/AboutUs";
 import PostJobs from "./PostJobs/PostJobs";
 import Card from "./Card/Card";
-import style from "../../../../style";
+import styles from "../../../../style";
 const Home = () => {
   // Gsap
   // End
@@ -12,9 +12,9 @@ const Home = () => {
     <div className="interfont bg-[#F9FAFB]">
       {/* Navbar */}
       <div className="w-full  shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
-        <div className={`${style.paddingX} ${style.flexCenter}`}>
-          <div className={`${style.boxWidth} z-10`}>
-            <Navbar />
+        <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+          <div className={`${styles.boxWidth} z-10`}>
+            <Navbar animation={true}/>
           </div>
         </div>
       </div>

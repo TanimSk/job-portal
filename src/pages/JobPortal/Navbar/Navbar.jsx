@@ -6,26 +6,28 @@ import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { existsInLocalStorage } from "../../../utils/manageLocalStorage";
 
-const Navbar = () => {
+const Navbar = ({ animation }) => {
   // Gsap
   const comp = useRef(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from("#headlineLogo", {
-        y: -40,
-        opacity: 0,
-        delay: 0.4,
-      });
-      gsap.from("#navitems #navitem", {
-        y: -40,
-        opacity: 0,
-        delay: 0.4,
-        stagger: 0.1,
-      });
-    }, comp);
+    if (animation) {
+      const ctx = gsap.context(() => {
+        gsap.from("#headlineLogo", {
+          y: -40,
+          opacity: 0,
+          delay: 0.4,
+        });
+        gsap.from("#navitems #navitem", {
+          y: -40,
+          opacity: 0,
+          delay: 0.4,
+          stagger: 0.1,
+        });
+      }, comp);
 
-    return () => ctx.revert();
+      return () => ctx.revert();
+    }
   }, []);
   // Main
   const [openClose, setopenClose] = useState(true);
@@ -101,6 +103,16 @@ const Navbar = () => {
         >
           Post Jobs
         </div>
+
+        <div
+          id="navitem"
+          onClick={() => {
+            navigate("/job-api");
+          }}
+          className="nav-item  cursor-pointer font-semibold"
+        >
+          More Jobs
+        </div>
         {/* <div className="nav-item  cursor-pointer font-semibold">Contact Us</div> */}
       </div>
       {/* Mobile */}
@@ -145,6 +157,14 @@ const Navbar = () => {
             className="nav-item  cursor-pointer font-semibold"
           >
             Post Jobs
+          </div>
+          <div
+            onClick={() => {
+              navigate("/job-api");
+            }}
+            className="nav-item  cursor-pointer font-semibold"
+          >
+            More Jobs
           </div>
           {/* <div className="nav-item  cursor-pointer font-semibold">
             Contact Us
