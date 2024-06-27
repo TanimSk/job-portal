@@ -37,23 +37,24 @@ const HeroHome = () => {
 
   return (
     <>
-      <video
-        autoPlay
-        muted
-        loop
-        className="absolute top-[-1rem] left-0 h-[100vh]"
-        style={{
-          background: "linear-gradient(#273491, #0b134e, #0b134e)",
-        }}
-      >
-        <source src={bgVideo} />
-      </video>
       <div
         ref={comp}
         id="heroGSAP"
         // style={ctaStyle}
-        className="flex flex-col items-center justify-center h-screen px-6 py-12 space-y-4"
+        className="flex flex-col relative items-center justify-center h-screen px-6 py-12 space-y-4 "
       >
+        {/* bg-video */}
+        <video
+          autoPlay
+          muted
+          loop
+          className="absolute inset-0 w-full h-screen object-cover"
+          // style={{
+          //   background: "linear-gradient(#273491, #0b134e, #0b134e)",
+          // }}
+        >
+          <source src={bgVideo} />
+        </video>
         {/* Title */}
         <h1
           id="item"
