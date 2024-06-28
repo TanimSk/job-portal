@@ -20,14 +20,15 @@ const Footer = () => {
                   alt="Logo"
                 />
                 <h1 className="flex items-center justify-center space-x-1 text-xl font-bold">
-                  <span className="text-[#D6C8F4]">Job</span>
-                  <span className="text-white">Portal</span>
+                  <span className="text-[#D6C8F4]">Career</span>
+                  <span className="text-white">Bridge</span>
                 </h1>
               </div>
               <p className="text-base leading-relaxed text-white mt-7">
-                Job Portal is your go-to online destination for connecting top
-                talent with leading employers. Whether you're searching for your
-                next career move or seeking to hire exceptional professionals.
+                Career Bridge is your go-to online destination for connecting
+                top talent with leading employers. Whether you're searching for
+                your next career move or seeking to hire exceptional
+                professionals.
               </p>
             </div>
             {/* Company */}

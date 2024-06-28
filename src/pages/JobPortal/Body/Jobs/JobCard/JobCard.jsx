@@ -15,11 +15,15 @@ const JobCard = ({ job }) => {
   };
 
   return (
-    <div className="h-[15rem] bg-white p-[2rem] shadow-lg space-y-3 flex flex-col">
+    <div className="h-[16rem] bg-white p-[2rem] shadow-lg space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex-col flex space-y-2">
           <h1 className="text-[#1E1E1E] text-md font-semibold">{job?.title}</h1>
-          <p className="text-xs text-[#5E6368]">{job.description}</p>
+          <p className="text-xs text-[#5E6368] h-[2rem]">
+            {job?.description.length > 30
+              ? job?.description.slice(0, 80) + "..."
+              : job?.description}
+          </p>
           <div className="flex flex-col text-sm text-[#5E6368]">
             <h6 className="flex">
               <span className="mr-3">

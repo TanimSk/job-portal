@@ -24,8 +24,8 @@ const Navbar = () => {
           }}
           className="flex items-center justify-center space-x-1 text-xl font-bold cursor-pointer"
         >
-          <span className="text-[#9773df]">Job</span>
-          <span>Portal</span>
+          <span className="text-[#9773df]">Career</span>
+          <span>Bridge</span>
         </h1>
       </div>
       {/* pc */}

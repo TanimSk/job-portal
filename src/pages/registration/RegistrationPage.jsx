@@ -84,11 +84,13 @@ const RegistrationPage = () => {
       .then((res) => {
         if (res.ok) {
           navigate("/company-login");
+          return "ok";
         }
-        return res.text();
+        return null;
       })
       .then((data) => {
-        alert("Couldn't create an account for you, try again");
+        if (data == null)
+          alert("Couldn't create an account for you, try again");
         console.log(data);
       });
   };
@@ -206,7 +208,9 @@ const RegistrationPage = () => {
             {/* Form */}
             <div
               className={`${
-                clicked ? "bottom-2 pb-[5rem] pt-[5rem]" : "absolute-div bottom-[-100rem]"
+                clicked
+                  ? "bottom-2 pb-[5rem] pt-[5rem]"
+                  : "absolute-div bottom-[-100rem]"
               } duration-500 absolute  bg-[#F3F4F6]`}
             >
               <div

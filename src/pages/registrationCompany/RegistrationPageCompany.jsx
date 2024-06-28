@@ -84,6 +84,7 @@ const RegistrationPageCompany = () => {
       .then((res) => {
         if (res.ok) {
           navigate("/applicant-login");
+          return "ok";
         }
         return null;
       })

@@ -74,7 +74,9 @@ const Card = () => {
   return (
     <div className="space-y-5  mt-[3rem]">
       <h1 className="text-4xl font-bold text-center text-[#3670a3]">
-        Pending Applications...
+        {applications.length === 0
+          ? "No Pending applications"
+          : "Pending Applications:"}
       </h1>
       <div className="container mx-auto px-4 py-12 shadow-lg">
         <Swiper
@@ -142,7 +144,7 @@ const Card = () => {
                               deleteApplication(item?.id);
                             }}
                           >
-                            Delete
+                            Cancel
                           </button>
                         </div>
                       </div>
