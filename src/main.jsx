@@ -5,6 +5,7 @@ import "./index.css";
 // Rect-router-dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Components:
+import EmailVerified from "./pages/JobPortal/Body/EmailVerified/EmailVerified";
 import RegistrationPageCompany from "./pages/registrationCompany/RegistrationPageCompany";
 import RegistrationPage from "./pages/registration/RegistrationPage";
 import LoginPage from "./pages/login/LoginPage";
@@ -74,10 +75,10 @@ const router = createBrowserRouter([
     path: "/company-login",
     element: <LoginPageCompany />,
   },
-  
+
   {
     path: "/job-api",
-    element:<Apiadd/>,
+    element: <Apiadd />,
   },
   {
     path: "/ApplicantProfile",
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
         <CompanyProfile />
       </CompanyPrivateRoute>
     ),
+  },
+  {
+    path: "/confirmation-success",
+    element: <EmailVerified />,
   },
 ]);
 

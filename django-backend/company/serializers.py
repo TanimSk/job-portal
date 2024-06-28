@@ -18,9 +18,8 @@ class CustomRegistrationSerializer(RegisterSerializer):
         data = super(CustomRegistrationSerializer, self).get_cleaned_data()
         extra_data = {
             "name": self.validated_data.get("name", ""),
-            "profile_img": self.validated_data.get("profile_img", ""),
-            "university_name": self.validated_data.get("university_name", ""),
-            "major": self.validated_data.get("major", ""),
+            "image": self.validated_data.get("image", ""),
+            "address": self.validated_data.get("address", ""),
             "description": self.validated_data.get("description", ""),
         }
         data.update(extra_data)
@@ -39,9 +38,9 @@ class CustomRegistrationSerializer(RegisterSerializer):
         instance.save()
 
         # Mark the email as verified
-        email_address = EmailAddress.objects.get(user=user, email=user.email)
-        email_address.verified = True
-        email_address.save()
+        # email_address = EmailAddress.objects.get(user=user, email=user.email)
+        # email_address.verified = True
+        # email_address.save()
 
         return user
 

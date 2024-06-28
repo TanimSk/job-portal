@@ -5,7 +5,6 @@ import { apiURL } from "../../Constant";
 import { storeInLocalStorage } from "../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 
-
 const LoginPageCompany = () => {
   const {
     register,
@@ -99,6 +98,25 @@ const LoginPageCompany = () => {
               type="submit"
               value="Login"
             />
+          </div>
+          {/* OR */}
+          <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
+            <hr className="border-gray-400" />
+            <p className="text-center text-sm">OR</p>
+            <hr className="border-gray-400" />
+          </div>
+
+          {/* Login Link */}
+          <div className="mt-3 space-x-3 text-xs flex justify-between items-center text-[#002D74] mb-4">
+            <p>Don't have an account?</p>
+            <button
+              className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300"
+              onClick={() => {
+                navigate("/company-registration");
+              }}
+            >
+              Register
+            </button>
           </div>
         </form>
       </div>

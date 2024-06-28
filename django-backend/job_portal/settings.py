@@ -146,8 +146,8 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = "noreply.service.tanimsk@gmail.com"
 EMAIL_HOST_PASSWORD = "igcosdywfsqodffg"
-# EMAIL_BACKEND = "django_smtp_ssl.SSLEmailBackend"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 AUTHENTICATION_BACKENDS = (
@@ -169,8 +169,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_SESSION_REMEMBER = True
-# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 
 ############################ ---- ############################
@@ -181,7 +181,7 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Asia/Dhaka"
+TIME_ZONE = "Europe/Amsterdam"
 USE_I18N = True
 USE_TZ = True
 

@@ -2,6 +2,11 @@ from dj_rest_auth.registration.views import RegisterView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import redirect
+from allauth.account.views import ConfirmEmailView
+from allauth.account.models import EmailConfirmationHMAC, EmailConfirmation
+from django.http import HttpResponse
+
 
 from company.serializers import (
     CustomRegistrationSerializer,
@@ -17,6 +22,25 @@ from django.core.mail import send_mail
 # Agent Registration
 class CompanyRegistrationView(RegisterView):
     serializer_class = CustomRegistrationSerializer
+
+
+class CustomConfirmEmailView(ConfirmEmailView):
+
+    def get(self, *args, **kwargs):
+        key = kwargs["key"]
+        try:
+            confirmation = EmailConfirmationHMAC.from_key(key)
+        except EmailConfirmation.DoesNotExist:
+            try:
+                confirmation = EmailConfirmation.objects.get(key=key.lower())
+            except EmailConfirmation.DoesNotExist:
+                confirmation = None
+
+        if confirmation:
+            confirmation.confirm(self.request)
+            return redirect("http://localhost:5173/confirmation-success")
+        else:
+            return HttpResponse("Invalid or expired token", status=400)
 
 
 class ProfileAPI(APIView):

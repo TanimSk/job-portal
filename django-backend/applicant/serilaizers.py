@@ -40,9 +40,9 @@ class CustomRegistrationSerializer(RegisterSerializer):
         instance.save()
 
         # Mark the email as verified
-        email_address = EmailAddress.objects.get(user=user, email=user.email)
-        email_address.verified = True
-        email_address.save()
+        # email_address = EmailAddress.objects.get(user=user, email=user.email)
+        # email_address.verified = True
+        # email_address.save()
 
         return user
 

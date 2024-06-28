@@ -24,6 +24,7 @@ from dj_rest_auth.views import PasswordResetConfirmView, PasswordResetView
 from dj_rest_auth.registration.views import VerifyEmailView
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.views import TokenVerifyView
+from company.views import CustomConfirmEmailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -34,6 +35,11 @@ urlpatterns = [
         "rest-auth/registration/account-confirm-email/",
         VerifyEmailView.as_view(),
         name="account_email_verification_sent",
+    ),
+    path(
+        "rest-auth/registration/account-confirm-email/<str:key>/",
+        CustomConfirmEmailView.as_view(),
+        name="account_confirm_email",
     ),
     path("rest-auth/registration/", include("dj_rest_auth.registration.urls")),
     # Password Reset

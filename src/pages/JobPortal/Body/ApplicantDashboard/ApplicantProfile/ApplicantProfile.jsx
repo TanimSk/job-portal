@@ -183,7 +183,7 @@ const ApplicantProfile = () => {
                 <input
                   type="text"
                   id="university"
-                  name="university"
+                  name="university_name"
                   value={formData?.university_name}
                   onChange={handleChange}
                   className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${

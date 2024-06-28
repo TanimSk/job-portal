@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../../../../assets/loginAnimation.gif";
-import Profile from "../../../../../assets/About.jpeg";
+import Profile from "../../../../../assets/profile.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { existsInLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
