@@ -38,7 +38,7 @@ class CustomConfirmEmailView(ConfirmEmailView):
 
         if confirmation:
             confirmation.confirm(self.request)
-            return redirect("http://localhost:5173/confirmation-success")
+            return redirect("https://career-bridge.netlify.app/confirmation-success")
         else:
             return HttpResponse("Invalid or expired token", status=400)
 

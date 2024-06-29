@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-$vjite$ify4#t(1fznp%^nom4lh(l@y%#8(u-elu@3ukfn_r-u
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-# CSRF_TRUSTED_ORIGINS = ["https://api.miahtrip.com", "https://api.discoverasiatrip.com"]
+CSRF_TRUSTED_ORIGINS = ["https://career-bridge.netlify.app", "https://test-23asd1skwwex.miahtrip.com"]
 # CORS Settings
 CORS_ALLOW_ALL_ORIGINS = True
 # Update this in production

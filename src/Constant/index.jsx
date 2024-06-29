@@ -9,7 +9,7 @@ import market from "../assets/About.jpeg";
 import video from "../assets/About.jpeg";
 import peoplw from "../assets/About.jpeg";
 
-export const apiURL = "http://127.0.0.1:8000";
+export const apiURL = "http://test-23asd1skwwex.miahtrip.com";
 export const jobsCompanies = [
   {
     tittle: "LiveJobs",
