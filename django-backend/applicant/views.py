@@ -64,7 +64,7 @@ class AllJobPostAPI(APIView):
     def get(self, request, format=None, *args, **kwargs):
         instance = JobPost.objects.exclude(
             Q(job_post_application__applicant=request.user.applicant)
-        )
+        ).order_by("-id")
         serialized_data = self.serializer_class(instance, many=True)
         return Response(serialized_data.data)
 
