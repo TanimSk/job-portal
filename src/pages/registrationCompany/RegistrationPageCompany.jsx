@@ -83,7 +83,8 @@ const RegistrationPageCompany = () => {
     })
       .then((res) => {
         if (res.ok) {
-          navigate("/applicant-login");
+          alert("A verification email is sent, please login after verifying");
+          navigate("/company-login");
           return "ok";
         }
         return null;
