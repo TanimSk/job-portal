@@ -67,6 +67,12 @@ const RegistrationPage = () => {
       alert("Please upload your profile image");
       return;
     }
+
+    if (data["password1"].length < 6) {
+      alert("Password length cannot be less than 6");
+      return;
+    }
+
     if (data["password1"] !== data["password2"]) {
       alert("The passwords do not match");
       return;
