@@ -8,7 +8,7 @@ import { apiURL } from "../../../../../Constant";
 
 const Modal = ({ isVisible, onClose, applicantDetails }) => {
   const changeStatus = (status) => {
-    let token = loadFromLocalStorage("applicant");
+    let token = loadFromLocalStorage("company");
     fetch(`${apiURL}/company/applicants/${applicantDetails?.id}/${status}`, {
       headers: {
         Authorization: `Token ${token}`,
