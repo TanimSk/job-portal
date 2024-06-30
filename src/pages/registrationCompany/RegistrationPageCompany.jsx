@@ -79,12 +79,12 @@ const RegistrationPageCompany = () => {
     }
 
     if (data["password1"].length < 6) {
-      alert("Password length cannot be less than 6");
+      toast("Password length cannot be less than 6");
       return;
     }
 
     if (data["password1"] !== data["password2"]) {
-      alert("The passwords do not match");
+      toast("The passwords do not match");
       return;
     }
 
@@ -99,7 +99,7 @@ const RegistrationPageCompany = () => {
     })
       .then((res) => {
         if (res.ok) {
-          alert("A verification email is sent, please login after verifying");
+          toast("A verification email is sent, please login after verifying");
           navigate("/company-login");
           return "ok";
         }
@@ -107,7 +107,7 @@ const RegistrationPageCompany = () => {
       })
       .then((data) => {
         if (data == null)
-          alert("Couldn't create an account for you, try again");
+          toast("Couldn't create an account for you, try again");
         console.log(data);
       });
   };

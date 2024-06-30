@@ -4,6 +4,7 @@ import React from "react";
 import { apiURL } from "../../Constant";
 import { storeInLocalStorage } from "../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginPageCompany = () => {
   const {
@@ -29,7 +30,7 @@ const LoginPageCompany = () => {
         if (res.ok) {
           return res.json();
         }
-        alert("credentials were incorrect!");
+        toast("credentials were incorrect!");
         return null;
       })
       .then((data) => {

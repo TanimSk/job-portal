@@ -94,8 +94,8 @@ const ApplicantProfile = () => {
       })
       .then((data) => {
         if (data == null) return;
-        setIsEditing(true);
-        alert("Successfully updated profile");
+        setIsEditing(true);      
+        toast("Successfully updated profile");
       });
   };
 

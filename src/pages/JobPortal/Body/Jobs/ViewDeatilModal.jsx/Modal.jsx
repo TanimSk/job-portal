@@ -105,7 +105,7 @@ const Modal = ({ isVisible, onClose, job }) => {
       .then((data) => {
         console.log(data);
         if (data == null) return;
-        alert("Successfully Applied!");
+        toast("Successfully Applied!");
         location.reload();
       });
   };

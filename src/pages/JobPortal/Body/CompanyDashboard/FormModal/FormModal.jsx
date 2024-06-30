@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsFillSignpostFill } from "react-icons/bs";
 import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { apiURL } from "../../../../../Constant";
+import { toast } from "react-toastify";
 
 const Modal = ({ isVisible, onClose }) => {
   const [jobData, setJobData] = useState({
@@ -44,7 +45,7 @@ const Modal = ({ isVisible, onClose }) => {
       })
       .then((data) => {
         if (data == null) return;
-        alert("Successfully created the job post");
+        toast("Successfully created the job post");
         location.reload();
       });
 

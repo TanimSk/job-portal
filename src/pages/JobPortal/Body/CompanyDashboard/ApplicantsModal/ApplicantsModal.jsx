@@ -5,7 +5,7 @@ import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { apiURL } from "../../../../../Constant";
-
+import { toast } from "react-toastify";
 
 const Modal = ({ isVisible, onClose, applicantDetails }) => {
   const changeStatus = (status) => {
@@ -26,7 +26,7 @@ const Modal = ({ isVisible, onClose, applicantDetails }) => {
       .then((data) => {
         console.log(data);
         if (data == null) return;
-        alert(`Application ${status}`);
+        toast(`Application ${status}`);
         location.reload();
       });
   };

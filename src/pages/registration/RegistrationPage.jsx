@@ -84,7 +84,7 @@ const RegistrationPage = () => {
     }
 
     if (data["password1"] !== data["password2"]) {
-      alert("The passwords do not match");
+      toast("The passwords do not match");
       return;
     }
 
@@ -99,7 +99,7 @@ const RegistrationPage = () => {
     })
       .then((res) => {
         if (res.ok) {
-          alert("A verification email is sent, please login after verifying");
+          toast("A verification email is sent, please login after verifying");
           navigate("/applicant-login");
           return "ok";
         }
@@ -107,7 +107,7 @@ const RegistrationPage = () => {
       })
       .then((data) => {
         if (data == null)
-          alert("Couldn't create an account for you, try again");
+          toast("Couldn't create an account for you, try again");
         console.log(data);
       });
   };

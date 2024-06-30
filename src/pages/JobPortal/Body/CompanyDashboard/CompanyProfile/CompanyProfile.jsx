@@ -96,7 +96,7 @@ const CompanyProfile = () => {
       .then((data) => {
         if (data == null) return;
         setIsEditing(true);
-        alert("Successfully updated profile");
+        toast("Successfully updated profile");
       });
   };
 

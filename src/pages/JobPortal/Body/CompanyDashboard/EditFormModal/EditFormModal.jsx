@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsFillSignpostFill } from "react-icons/bs";
 import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { apiURL } from "../../../../../Constant";
+import { toast } from "react-toastify";
 
 const EditFormModal = ({ isVisible, onClose, jobDetails }) => {
   const [jobData, setJobData] = useState({
@@ -49,7 +50,7 @@ const EditFormModal = ({ isVisible, onClose, jobDetails }) => {
       })
       .then((data) => {
         if (data == null) return;
-        alert("Successfully updated the job post");
+        toast("Successfully updated the job post");
         location.reload();
       });
 
