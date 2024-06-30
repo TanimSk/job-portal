@@ -6,6 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { apiURL } from "../../../../../Constant";
 
+
 const Modal = ({ isVisible, onClose, applicantDetails }) => {
   const changeStatus = (status) => {
     let token = loadFromLocalStorage("company");

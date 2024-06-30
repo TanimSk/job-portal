@@ -8,6 +8,7 @@ import Avatar from "../../assets/upload.png";
 import axios from "axios";
 import { apiURL } from "../../Constant";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegistrationPageCompany = () => {
   const navigate = useNavigate();
@@ -55,8 +56,13 @@ const RegistrationPageCompany = () => {
           },
         }
       );
-      console.log(response.data.data.url);
-      setValue("image", response.data.data.url); // Set the img_url field in the form
+      if (response.status == 200) {
+        console.log(response.data.data.url);
+        setValue("image", response.data.data.url);
+        toast("Image uploaded!");
+      } else {
+        toast("Couldn't upload image, please try again!");
+      }
     } catch (error) {
       console.error("Error uploading image to imgbb", error);
     }
@@ -64,7 +70,11 @@ const RegistrationPageCompany = () => {
 
   const onSubmit = (data) => {
     if (!("image" in data)) {
-      alert("Please upload your company image");
+      if (image !== Avatar) {
+        toast("Please wait till the image is being uploaded");
+        return;
+      }
+      toast("Please upload your profile image");
       return;
     }
 
@@ -142,6 +152,7 @@ const RegistrationPageCompany = () => {
                   type="file"
                   id="fileInput"
                   className="hidden"
+                  accept="image/*"
                   onChange={handleImageChange}
                 />
               </label>

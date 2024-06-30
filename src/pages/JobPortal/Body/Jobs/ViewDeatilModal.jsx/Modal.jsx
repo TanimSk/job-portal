@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { apiURL } from "../../../../../Constant";
+import { toast } from "react-toastify";
 
 const Modal = ({ isVisible, onClose, job }) => {
   if (!isVisible) {
@@ -56,8 +57,13 @@ const Modal = ({ isVisible, onClose, job }) => {
           },
         }
       );
-      console.log(response.data.data.url);
-      setFormData({ ...formData, cv: response.data.data.url });
+      if (response.status == 200) {
+        console.log(response.data.data.url);
+        setFormData({ ...formData, cv: response.data.data.url });
+        toast("Image uploaded!");
+      } else {
+        toast("Couldn't upload image, please try again!");
+      }
     } catch (error) {
       console.error("Error uploading image to imgbb", error);
     }
@@ -65,12 +71,16 @@ const Modal = ({ isVisible, onClose, job }) => {
 
   const apply = (e) => {
     if (formData["cv"] === "") {
-      alert("Please upload the CV");
+      if (image !== uploadImg) {
+        toast("Please wait till the image is being uploaded");
+        return;
+      }
+      toast("Please upload the CV");
       return;
     }
 
     if (formData["description"] === "") {
-      alert("Description cannot be empty");
+      toast("Description cannot be empty");
       return;
     }
 
@@ -107,7 +117,7 @@ const Modal = ({ isVisible, onClose, job }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-8 w-[50vw] max-w-[40rem] min-w-[15rem] mx-auto rounded-md z-50"
+        className="bg-white p-8 w-[70vw] max-w-[40rem] min-w-[25rem] mx-auto rounded-md z-50"
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold"></h2>
@@ -119,8 +129,8 @@ const Modal = ({ isVisible, onClose, job }) => {
           </button>
         </div>
 
-        <div className="flex">
-          <div className="flex flex-col">
+        <div className="flex h-[70vh] overflow-y-scroll">
+          <div className="flex flex-col pl-2 pr-8">
             <h2 className="text-xl font-semibold mb-6">Fill this form</h2>
 
             <div className="relative w-20">
@@ -140,6 +150,7 @@ const Modal = ({ isVisible, onClose, job }) => {
                   type="file"
                   id="fileInput"
                   className="hidden"
+                  accept="image/*"
                   onChange={handleImageChange}
                 />
               </label>
@@ -170,7 +181,7 @@ const Modal = ({ isVisible, onClose, job }) => {
             </div>
           </div>
 
-          <div className="w-20"></div>
+          {/* <div className="block w-[10rem]"></div> */}
 
           <div>
             <h2 className="text-xl font-semibold">{job?.title}</h2>

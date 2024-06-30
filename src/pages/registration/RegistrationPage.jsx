@@ -8,6 +8,7 @@ import Avatar from "../../assets/upload.png";
 import axios from "axios";
 import { apiURL } from "../../Constant";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -55,8 +56,13 @@ const RegistrationPage = () => {
           },
         }
       );
-      console.log(response.data.data.url);
-      setValue("profile_img", response.data.data.url); // Set the img_url field in the form
+      if (response.status == 200) {
+        console.log(response.data.data.url);
+        setValue("profile_img", response.data.data.url);
+        toast("Image uploaded!");
+      } else {
+        toast("Couldn't upload image, please try again!");
+      }
     } catch (error) {
       console.error("Error uploading image to imgbb", error);
     }
@@ -64,12 +70,16 @@ const RegistrationPage = () => {
 
   const onSubmit = (data) => {
     if (!("profile_img" in data)) {
-      alert("Please upload your profile image");
+      if (image !== Avatar) {
+        toast("Please wait till the image is being uploaded");
+        return;
+      }
+      toast("Please upload your profile image");
       return;
     }
 
     if (data["password1"].length < 6) {
-      alert("Password length cannot be less than 6");
+      toast("Password length cannot be less than 6");
       return;
     }
 
@@ -142,6 +152,7 @@ const RegistrationPage = () => {
                   type="file"
                   id="fileInput"
                   className="hidden"
+                  accept="image/*"
                   onChange={handleImageChange}
                 />
               </label>

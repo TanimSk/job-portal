@@ -10,6 +10,7 @@ import axios from "axios";
 import { removeFromLocalStorage } from "../../../../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const ApplicantProfile = () => {
   const [image, setImage] = useState("");
@@ -59,8 +60,13 @@ const ApplicantProfile = () => {
           },
         }
       );
-      console.log(response.data.data.url);
-      setFormData({ ...formData, profile_img: response.data.data.url });
+      if (response.status == 200) {
+        console.log(response.data.data.url);
+        setFormData({ ...formData, profile_img: response.data.data.url });
+        toast("Image uploaded!");
+      } else {
+        toast("Couldn't upload image, please try again!");
+      }
     } catch (error) {
       console.error("Error uploading image to imgbb", error);
     }
@@ -147,6 +153,7 @@ const ApplicantProfile = () => {
                   type="file"
                   id="fileInput"
                   className="hidden"
+                  accept="image/*"
                   onChange={handleImageChange}
                 />
               </label>

@@ -6,9 +6,13 @@ import { IoSave } from "react-icons/io5";
 import { useEffect } from "react";
 import axios from "axios";
 import { apiURL } from "../../../../../Constant";
-import { loadFromLocalStorage, removeFromLocalStorage } from "../../../../../utils/manageLocalStorage";
+import {
+  loadFromLocalStorage,
+  removeFromLocalStorage,
+} from "../../../../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const CompanyProfile = () => {
   const navigate = useNavigate();
@@ -57,8 +61,13 @@ const CompanyProfile = () => {
           },
         }
       );
-      console.log(response.data.data.url);
-      setFormData({ ...formData, image: response.data.data.url });
+      if (response.status == 200) {
+        console.log(response.data.data.url);
+        setFormData({ ...formData, image: response.data.data.url });
+        toast("Image uploaded!");
+      } else {
+        toast("Couldn't upload image, please try again!");
+      }
     } catch (error) {
       console.error("Error uploading image to imgbb", error);
     }
@@ -147,6 +156,7 @@ const CompanyProfile = () => {
                   type="file"
                   id="fileInput"
                   className="hidden"
+                  accept="image/*"
                   onChange={handleImageChange}
                 />
               </label>
@@ -184,7 +194,7 @@ const CompanyProfile = () => {
                 <input
                   type="location"
                   id="location"
-                  name="location"
+                  name="address"
                   value={formData.address}
                   onChange={handleChange}
                   className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
@@ -206,7 +216,7 @@ const CompanyProfile = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  className={`bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+                  className={`h-[8rem] bg-violet-100 border border-violet-200 outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
                     isEditing ? "" : "cursor-not-allowed"
                   }`}
                   readOnly={!isEditing}
