@@ -84,7 +84,7 @@ const Footer = () => {
           </div>
           <hr className="mt-16 mb-10 border-gray-200" />
           <p className="text-sm text-center text-white">
-            © Copyright 2021, All Rights Reserved by Postcraft
+            All Rights Reserved by CareerBridge
           </p>
         </div>
       </div>
