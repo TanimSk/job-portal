@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "../../../../../style";
-import CompanyNav from "../CompanyNav/CompanyNav";
+// import CompanyNav from "../CompanyNav/CompanyNav";
+import Navbar from "../../../Navbar/Navbar";
 import { LuCamera } from "react-icons/lu";
 import { IoSave } from "react-icons/io5";
 import { useEffect } from "react";
@@ -130,7 +131,7 @@ const CompanyProfile = () => {
       <div className="w-full shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
         <div className={`${style.paddingX} ${style.flexCenter}`}>
           <div className={`${style.boxWidth} z-10`}>
-            <CompanyNav />
+            <Navbar />
           </div>
         </div>
       </div>

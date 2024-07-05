@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Jobapplied from "./Job applied/Jobapplied";
 // import FormModal from "./FormModal/FormModal";
-import ApplicantNavbar from "./ApplicantNavbar/ApplicantNavbar";
+import Navbar from "../../Navbar/Navbar";
 import style from "../../../../style";
 import { apiURL } from "../../../../Constant";
 import { useEffect } from "react";
@@ -45,7 +45,7 @@ const ApplicantDashboard = () => {
       <div className="w-full  shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
         <div className={`${style.paddingX} ${style.flexCenter}`}>
           <div className={`${style.boxWidth} z-10`}>
-            <ApplicantNavbar />
+            <Navbar />
           </div>
         </div>
       </div>

@@ -4,7 +4,12 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 // Gsap
 import gsap from "gsap";
-import { existsInLocalStorage } from "../../../utils/manageLocalStorage";
+import {
+  existsInLocalStorage,
+  removeFromLocalStorage,
+} from "../../../utils/manageLocalStorage";
+import Profile from "../../../assets/profile.png";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = ({ animation }) => {
   // Gsap
@@ -62,7 +67,7 @@ const Navbar = ({ animation }) => {
       {/* pc */}
       <div
         id="navitems"
-        className="links hidden md:flex items-center text-[#404040]  space-x-10 font-md"
+        className="links hidden md:flex items-center text-[#404040]  space-x-8 font-md"
       >
         <div
           id="navitem"
@@ -73,46 +78,121 @@ const Navbar = ({ animation }) => {
         >
           Home
         </div>
-        {existsInLocalStorage("applicant") && (
-          <div
-            id="navitem"
-            onClick={() => {
-              navigate("/applicantdashboard");
-            }}
-            className="nav-item  cursor-pointer font-semibold"
-          >
-            Dashboard
-          </div>
+
+        {existsInLocalStorage("company") ? (
+          <>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/companyDashboard");
+              }}
+              className="nav-item  cursor-pointer font-semibold"
+            >
+              Dashboard
+            </div>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/Companyprofile");
+              }}
+              className="cursor-pointer"
+            >
+              <img
+                className="rounded-full w-[3rem] h-[3rem] object-cover"
+                src={Profile}
+                alt=""
+              />
+            </div>
+            <div
+              id="navitem"
+              onClick={() => {
+                removeFromLocalStorage("applicant");
+                removeFromLocalStorage("company");
+                location.reload();
+                location.href = "/";
+              }}
+              className="cursor-pointer text-[#273491]"
+            >
+              <FaSignOutAlt size={30} />
+            </div>
+          </>
+        ) : existsInLocalStorage("applicant") ? (
+          <>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/applicantdashboard");
+              }}
+              className="nav-item  cursor-pointer font-semibold"
+            >
+              Dashboard
+            </div>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/jobs");
+              }}
+              className="nav-item  cursor-pointer font-semibold"
+            >
+              Find jobs
+            </div>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/ApplicantProfile");
+              }}
+              className="cursor-pointer"
+            >
+              <img
+                className="rounded-full w-[3rem] h-[3rem] object-cover"
+                src={Profile}
+                alt=""
+              />
+            </div>
+            <div
+              id="navitem"
+              onClick={() => {
+                removeFromLocalStorage("applicant");
+                removeFromLocalStorage("company");
+                location.href = "/";
+              }}
+              className="cursor-pointer text-[#273491]"
+            >
+              <FaSignOutAlt size={30} />
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/job-api");
+              }}
+              className="nav-item  cursor-pointer font-semibold"
+            >
+              More Jobs
+            </div>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/applicant-login");
+              }}
+              className="bg-[#181e6f] text-white px-4 py-2 rounded-lg cursor-pointer font-semibold hover:bg-[#2d39a6]"
+            >
+              Applicant Login
+            </div>
+            <div
+              id="navitem"
+              onClick={() => {
+                navigate("/company-login");
+              }}
+              className="bg-[#181e6f] text-white px-4 py-2 rounded-lg cursor-pointer font-semibold hover:bg-[#2d39a6]"
+            >
+              Company Login
+            </div>
+          </>
         )}
 
-        <div
-          id="navitem"
-          onClick={() => {
-            navigate("/jobs");
-          }}
-          className="nav-item  cursor-pointer font-semibold"
-        >
-          Find jobs
-        </div>
-        <div
-          id="navitem"
-          onClick={() => {
-            navigate("/companydashboard");
-          }}
-          className="nav-item  cursor-pointer font-semibold"
-        >
-          Post Jobs
-        </div>
-
-        <div
-          id="navitem"
-          onClick={() => {
-            navigate("/job-api");
-          }}
-          className="nav-item  cursor-pointer font-semibold"
-        >
-          More Jobs
-        </div>
         {/* <div className="nav-item  cursor-pointer font-semibold">Contact Us</div> */}
       </div>
       {/* Mobile */}
@@ -133,39 +213,72 @@ const Navbar = ({ animation }) => {
           >
             Home
           </div>
-
-          <div
-            onClick={() => {
-              navigate("/applicantdashboard");
-            }}
-            className="nav-item  cursor-pointer font-semibold"
-          >
-            Dashboard
-          </div>
-          <div
-            onClick={() => {
-              navigate("/jobs");
-            }}
-            className="nav-item  cursor-pointer font-semibold"
-          >
-            Find jobs
-          </div>
-          <div
-            onClick={() => {
-              navigate("/companydashboard");
-            }}
-            className="nav-item  cursor-pointer font-semibold"
-          >
-            Post Jobs
-          </div>
-          <div
-            onClick={() => {
-              navigate("/job-api");
-            }}
-            className="nav-item  cursor-pointer font-semibold"
-          >
-            More Jobs
-          </div>
+          {existsInLocalStorage("company") ? (
+            <>
+              <div
+                onClick={() => {
+                  navigate("/companyDashboard");
+                }}
+                className="nav-item  cursor-pointer font-semibold"
+              >
+                Dashboard
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/Companyprofile");
+                }}
+                className="nav-item  cursor-pointer font-semibold"
+              >
+                Profile
+              </div>
+            </>
+          ) : existsInLocalStorage("applicant") ? (
+            <>
+              <div
+                onClick={() => {
+                  navigate("/applicantdashboard");
+                }}
+                className="nav-item  cursor-pointer font-semibold"
+              >
+                Dashboard
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/ApplicantProfile");
+                }}
+                className="nav-item  cursor-pointer font-semibold"
+              >
+                Profile
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                onClick={() => {
+                  navigate("/applicant-login");
+                }}
+                className="nav-item  cursor-pointer font-semibold"
+              >
+                Applicant Login
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/company-login");
+                }}
+                className="nav-item  cursor-pointer font-semibold"
+              >
+                Company Login
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/job-api");
+                }}
+                className="nav-item cursor-pointer font-semibold"
+              >
+                More Jobs
+              </div>
+            </>
+          )}
           {/* <div className="nav-item  cursor-pointer font-semibold">
             Contact Us
           </div> */}

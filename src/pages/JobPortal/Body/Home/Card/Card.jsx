@@ -40,7 +40,7 @@ const Card = () => {
           className="swiper_container"
         >
           <SwiperSlide>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pb-4">
               {FeaturedJobsgroup1.map((item, index) => (
                 <div
                   key={index}
@@ -74,7 +74,7 @@ const Card = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pb-4">
               {FeaturedJobsgroup2.map((item, index) => (
                 <div
                   key={index}

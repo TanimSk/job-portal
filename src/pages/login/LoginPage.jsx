@@ -2,7 +2,7 @@ import jobAnimation from "../../assets/loginAnimation.gif";
 import { useForm } from "react-hook-form";
 import React from "react";
 import { apiURL } from "../../Constant";
-import { storeInLocalStorage } from "../../utils/manageLocalStorage";
+import { removeFromLocalStorage, storeInLocalStorage } from "../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -18,6 +18,8 @@ const LoginPageCompany = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    removeFromLocalStorage("company");
+    removeFromLocalStorage("applicant");
 
     fetch(`${apiURL}/rest-auth/login/`, {
       method: "POST",

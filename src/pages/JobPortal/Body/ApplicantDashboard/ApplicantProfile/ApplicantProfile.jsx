@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "../../../../../style";
-import ApplicantNavbar from "../ApplicantNavbar/ApplicantNavbar";
+// import ApplicantNavbar from "../ApplicantNavbar/ApplicantNavbar";
+import Navbar from "../../../Navbar/Navbar";
 import { LuCamera } from "react-icons/lu";
 import { IoSave } from "react-icons/io5";
 import { loadFromLocalStorage } from "../../../../../utils/manageLocalStorage";
@@ -129,7 +130,7 @@ const ApplicantProfile = () => {
       <div className="w-full shadow-md top-0 sticky z-50 bg-[#F9FAFB]">
         <div className={`${style.paddingX} ${style.flexCenter}`}>
           <div className={`${style.boxWidth} z-10`}>
-            <ApplicantNavbar />
+            <Navbar />
           </div>
         </div>
       </div>
