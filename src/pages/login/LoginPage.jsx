@@ -2,9 +2,13 @@ import jobAnimation from "../../assets/loginAnimation.gif";
 import { useForm } from "react-hook-form";
 import React from "react";
 import { apiURL } from "../../Constant";
-import { removeFromLocalStorage, storeInLocalStorage } from "../../utils/manageLocalStorage";
+import {
+  removeFromLocalStorage,
+  storeInLocalStorage,
+} from "../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import loginBG from "../../assets/loginBG.jpg";
 
 const LoginPageCompany = () => {
   const {
@@ -44,16 +48,24 @@ const LoginPageCompany = () => {
   };
 
   return (
-    <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+    <section
+      className="bg-gray-50 min-h-screen flex items-center justify-center"
+      style={{
+        background: `url(${loginBG})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* login container */}
-      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+      <div className="flex rounded-2xl shadow-lg max-w-3xl p-5 items-center bg-opacity-50 backdrop-blur-xl bg-gray-300">
         {/* image */}
         <div className="md:block hidden w-1/2">
           <img
             className="rounded-2xl"
             src={jobAnimation}
             alt="Login"
-            style={{ backgroundColor: "gray" }}
+            style={{ backgroundColor: "white" }}
           />
           <p className="mt-6 text-[#002D74] text-center text-sm">
             Hop in the world of job seeking.
@@ -62,7 +74,7 @@ const LoginPageCompany = () => {
         {/* form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="md:w-1/2 px-8 md:px-16 w-full flex flex-col"
+          className="md:w-1/2 px-8 md:px-16 w-full flex flex-col "
         >
           <h2 className="font-bold text-[1.4rem] text-[#002D74] mb-6">
             Applicant Login

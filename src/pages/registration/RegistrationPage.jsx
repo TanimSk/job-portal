@@ -9,6 +9,7 @@ import axios from "axios";
 import { apiURL } from "../../Constant";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import loginBG from "../../assets/loginBG.jpg";
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -113,16 +114,24 @@ const RegistrationPage = () => {
   };
 
   return (
-    <section className="bg-gray-50  min-h-screen flex items-center justify-center">
+    <section
+      className="bg-gray-50  min-h-screen flex items-center justify-center"
+      style={{
+        background: `url(${loginBG})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="bg-gray-100 relative flex items-center justify-center rounded-2xl shadow-lg max-w-3xl p-5 overflow-hidden h-[80vh]">
+        <div className="relative flex items-center justify-center rounded-2xl shadow-lg max-w-3xl p-5 overflow-hidden h-[80vh] bg-opacity-50 backdrop-blur-xl bg-gray-300">
           {/* Left Section - Image */}
           <div className="md:w-1/2 hidden md:block">
             <img
               className="rounded-2xl"
               src={jobAnimation}
               alt="Login Animation"
-              style={{ backgroundColor: "gray" }}
+              style={{ backgroundColor: "white" }}
             />
             <p className="mt-6 text-[#002D74] text-center text-sm">
               Hop into the world of job seeking.
@@ -134,7 +143,13 @@ const RegistrationPage = () => {
             className={`w-full  h-screen md:w-1/2 flex flex-col items-center justify-center duration-500 px-8 md:px-16 `}
           >
             {/* Upload Image */}
-            <div className={`flex  flex-col items-center space-y-3`}>
+            <div
+              className={`${
+                clicked
+                  ? "top-[-30rem]"
+                  : "top-[6rem]"
+              } flex flex-col items-center space-y-3 duration-500 absolute`}
+            >
               <img
                 className="object-cover w-32 h-32 ring-2 ring-purple-500 p-2 rounded-2xl"
                 src={image}
@@ -229,7 +244,7 @@ const RegistrationPage = () => {
                 clicked
                   ? "bottom-2 pb-[5rem] pt-[5rem]"
                   : "absolute-div bottom-[-100rem]"
-              } duration-500 absolute  bg-[#F3F4F6]`}
+              } duration-500 absolute`}
             >
               <div
                 onSubmit={handleSubmit(onSubmit)}

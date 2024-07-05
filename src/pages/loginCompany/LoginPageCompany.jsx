@@ -6,6 +6,7 @@ import { storeInLocalStorage } from "../../utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { removeFromLocalStorage } from "../../utils/manageLocalStorage";
+import loginBG from "../../assets/loginBG.jpg";
 
 const LoginPageCompany = () => {
   const {
@@ -45,16 +46,24 @@ const LoginPageCompany = () => {
   };
 
   return (
-    <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+    <section
+      className="bg-gray-50 min-h-screen flex items-center justify-center"
+      style={{
+        background: `url(${loginBG})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* login container */}
-      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center bg-opacity-50 backdrop-blur-xl bg-gray-300">
         {/* image */}
         <div className="md:block hidden w-1/2">
           <img
             className="rounded-2xl"
             src={jobAnimation}
             alt="Login"
-            style={{ backgroundColor: "gray" }}
+            style={{ backgroundColor: "white" }}
           />
           <p className="mt-6 text-[#002D74] text-center text-sm">
             Hop in the world of job seeking.
